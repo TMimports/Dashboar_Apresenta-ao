@@ -16,6 +16,7 @@ import S11UnitEconomics from './slides/S11UnitEconomics'
 import S12Oportunidade from './slides/S12Oportunidade'
 import S13Tese from './slides/S13Tese'
 import S14ImpactoEconomico from './slides/S14ImpactoEconomico'
+import SimuladorSlide from './slides/SimuladorSlide'
 import S15RiscoControlado from './slides/S15RiscoControlado'
 import S16OportunidadeEstrategica from './slides/S16OportunidadeEstrategica'
 import S17OQueBuscamos from './slides/S17OQueBuscamos'
@@ -26,7 +27,7 @@ const SLIDES = [
   S01Cover, S02Momento, S03QuemSomos, S04Ecossistema, S05Distribuicao,
   S06Autoridade, S07Qualidade, S08AssistenciaTecnica, S09Tecnologia,
   S10Estrutura, S11UnitEconomics, S12Oportunidade, S13Tese,
-  S14ImpactoEconomico, S15RiscoControlado, S16OportunidadeEstrategica,
+  S14ImpactoEconomico, SimuladorSlide, S15RiscoControlado, S16OportunidadeEstrategica,
   S17OQueBuscamos, S18PorQueTM, S19Encerramento
 ]
 
@@ -34,7 +35,7 @@ const SLIDE_TITLES = [
   'Capa', 'O Momento', 'Quem Somos', 'Ecossistema', 'Distribuição',
   'Autoridade', 'Qualidade', 'Assistência Técnica', 'Tecnologia',
   'Estrutura', 'Unit Economics', 'Oportunidade', 'Tese R$5M',
-  'Impacto Econômico', 'Risco Controlado', 'Oport. Estratégica',
+  'Impacto Econômico', 'Simulador', 'Risco Controlado', 'Oport. Estratégica',
   'O Que Buscamos', 'Por Que TM', 'Encerramento'
 ]
 
