@@ -8,7 +8,7 @@ const growthData = [
   { ano: '2022', containers: 10, receita: 3.0 },
   { ano: '2023', containers: 15, receita: 4.5 },
   { ano: '2024', containers: 20, receita: 6.0 },
-  { ano: '2025*', containers: 28, receita: 8.4 },
+  { ano: '2026*', containers: 28, receita: 8.4 },
 ]
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -89,7 +89,7 @@ export default function S18PorQueTM() {
           </div>
 
           <div className="p-4 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
-            <p className="text-xs text-[#8E8E93] mb-1">*Projeção 2025</p>
+            <p className="text-xs text-[#8E8E93] mb-1">*Projeção 2026</p>
             <p className="text-[#FF6B00] font-bold text-sm">+40% crescimento vs 2024</p>
           </div>
 

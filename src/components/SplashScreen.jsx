@@ -236,7 +236,7 @@ export default function SplashScreen({ onDone }) {
             letterSpacing: '0.25em', textTransform: 'uppercase',
             marginBottom: '2.5rem',
           }}>
-            <Typewriter text="Plano de Expansão & Estruturação de Capital — 2025" speed={35} />
+            <Typewriter text="Plano de Expansão & Estruturação de Capital — 2026" speed={35} />
           </p>
         )}
 
@@ -293,7 +293,7 @@ export default function SplashScreen({ onDone }) {
             v2.0 — CONFIDENCIAL
           </div>
           <div style={{ position: 'absolute', bottom: 12, right: 16, color: '#3A3A3C', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-            TM GROUP © 2025
+            TM GROUP © 2026
           </div>
         </>
       )}

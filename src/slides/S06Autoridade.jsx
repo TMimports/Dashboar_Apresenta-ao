@@ -12,7 +12,7 @@ const trainingData = [
   { ano: '2022', alunos: 120, color: '#3A3A3C' },
   { ano: '2023', alunos: 280, color: '#994000' },
   { ano: '2024', alunos: 510, color: '#FF6B00' },
-  { ano: '2025', alunos: 840, color: '#FF8C33' },
+  { ano: '2026', alunos: 840, color: '#FF8C33' },
 ]
 
 const CustomTooltip = ({ active, payload, label }) => {
