@@ -1,7 +1,3 @@
-/* Logo TM Elétricas — recriada a partir do original TM Imports
-   com "ELÉTRICAS" substituindo "IMPORTS" no mesmo estilo gráfico.
-   Usa o arquivo /logo-tm-eletricas.svg (SVG com paths originais + novo texto SVG). */
-
 const sizeMap = {
   xs: { h: 28  },
   sm: { h: 42  },
@@ -10,39 +6,43 @@ const sizeMap = {
   xl: { h: 115 },
 }
 
+// Fator de escala para mobile (em vw, clampeado)
+const responsiveClamp = {
+  xs: 'clamp(20px, 4vw, 28px)',
+  sm: 'clamp(28px, 5vw, 42px)',
+  md: 'clamp(40px, 7vw, 60px)',
+  lg: 'clamp(50px, 9vw, 85px)',
+  xl: 'clamp(65px, 12vw, 115px)',
+}
+
 export default function LogoTMEletricas({ size = 'md', variant = 'full', animated = true }) {
   const s = sizeMap[size] || sizeMap.md
-
-  /* variant="icon"  → só o mark (sem texto ELÉTRICAS) — usa logo-tm.svg original, só porção superior */
-  /* variant="full"  → logo completa TM ELÉTRICAS (padrão) */
-  /* variant="hero"  → centralizada, maior, para capa */
+  const clamp = responsiveClamp[size] || responsiveClamp.md
 
   const imgSrc   = variant === 'icon' ? '/logo-tm.svg' : '/logo-tm-eletricas.svg'
-  const heightPx = variant === 'hero' ? s.h * 1.15 : s.h
+  const baseH    = variant === 'hero' ? s.h * 1.15 : s.h
+  const baseClamp = variant === 'hero'
+    ? clamp.replace(/(\d+)px/g, (_, n) => `${Math.round(Number(n) * 1.15)}px`)
+    : clamp
 
-  /* Para variant="icon", mostramos só o mark cortando via object-position + overflow hidden */
   const imgStyle = variant === 'icon'
     ? {
-        height: heightPx,
-        width:  heightPx * 0.9,
+        height: baseClamp,
+        width:  `calc(${baseClamp} * 0.9)`,
         objectFit: 'cover',
         objectPosition: '50% 38%',
       }
     : {
-        height: heightPx,
+        height: baseClamp,
         objectFit: 'contain',
+        maxWidth: '100%',
       }
 
   return (
     <div
       className="inline-flex items-center justify-center select-none"
       style={{
-        animation: animated
-          ? 'tm-float 4.5s ease-in-out infinite'
-          : 'none',
-        filter: animated
-          ? undefined
-          : 'none',
+        animation: animated ? 'tm-float 4.5s ease-in-out infinite' : 'none',
       }}
     >
       <img

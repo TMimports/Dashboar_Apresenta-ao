@@ -1,15 +1,36 @@
+import { Settings, User, BarChart3, Timer, Truck, Briefcase, Cpu } from 'lucide-react'
+import { RadarChart, Radar, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts'
+
 const systems = [
-  { label: 'ERP Próprio',          icon: '⚙️',  desc: 'Gestão operacional centralizada' },
-  { label: 'CRM Próprio',          icon: '👤',  desc: 'Relacionamento com cliente' },
-  { label: 'Controle Operacional', icon: '📊',  desc: 'Visibilidade em tempo real' },
-  { label: 'Controle de Ponto',    icon: '⏱️',  desc: 'RH e produtividade' },
-  { label: 'Gestão Logística',     icon: '🚚',  desc: 'Rastreio e distribuição' },
-  { label: 'Gestão Comercial',     icon: '💼',  desc: 'Pipeline e vendas' },
+  { icon: Settings,   label: 'ERP Próprio',          desc: 'Gestão operacional centralizada' },
+  { icon: User,       label: 'CRM Próprio',           desc: 'Relacionamento com cliente' },
+  { icon: BarChart3,  label: 'Controle Operacional',  desc: 'Visibilidade em tempo real' },
+  { icon: Timer,      label: 'Controle de Ponto',     desc: 'RH e produtividade' },
+  { icon: Truck,      label: 'Gestão Logística',      desc: 'Rastreio e distribuição' },
+  { icon: Briefcase,  label: 'Gestão Comercial',      desc: 'Pipeline e vendas' },
 ]
+
+const techScore = [
+  { subject: 'ERP',       A: 95 },
+  { subject: 'CRM',       A: 88 },
+  { subject: 'Logística', A: 90 },
+  { subject: 'Analytics', A: 85 },
+  { subject: 'IA',        A: 78 },
+  { subject: 'Automação', A: 92 },
+]
+
+const CustomTooltip = ({ active, payload }) => {
+  if (!active || !payload?.length) return null
+  return (
+    <div className="px-3 py-2 rounded-lg" style={{ background: '#1C1C1E', border: '1px solid #FF6B00' }}>
+      <p className="text-white font-bold text-sm">{payload[0]?.value}% maturidade</p>
+    </div>
+  )
+}
 
 export default function S09Tecnologia() {
   return (
-    <div className="relative w-full h-full flex flex-col px-16 py-10 overflow-hidden"
+    <div className="relative w-full h-full flex flex-col overflow-hidden slide-pad"
       style={{ background: '#0A0A0A' }}>
 
       <div className="absolute top-0 left-0 right-0 h-0.5 orange-line" />
@@ -17,38 +38,41 @@ export default function S09Tecnologia() {
         background: 'radial-gradient(ellipse 60% 40% at 80% 20%, rgba(255,107,0,0.06) 0%, transparent 70%)'
       }} />
 
-      {/* Header */}
-      <div className="mb-6 animate-fade-up">
+      <div className="mb-4 md:mb-6 animate-fade-up">
         <p className="text-[#FF6B00] text-xs font-medium tracking-widest uppercase mb-2">09 / Tecnologia &amp; IA</p>
-        <h2 className="text-4xl font-black text-white">Tecnologia proprietária e cultura de inovação</h2>
+        <h2 className="slide-title text-white">Tecnologia proprietária e cultura de inovação</h2>
       </div>
 
-      <div className="flex gap-10 flex-1 min-h-0">
-        {/* Left: grid systems */}
+      <div className="slide-row flex-1 min-h-0">
         <div className="flex-1 animate-fade-in delay-200">
-          <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-4">Sistemas próprios</p>
-          <div className="grid grid-cols-3 gap-3 h-full">
-            {systems.map((sys, i) => (
-              <div key={i}
-                className="flex flex-col gap-2 p-4 rounded-xl card-premium group cursor-default"
-                style={{ animationDelay: `${0.1 * i + 0.2}s` }}>
-                <div className="text-2xl group-hover:scale-110 transition-transform w-fit">{sys.icon}</div>
-                <p className="text-white font-semibold text-sm group-hover:text-[#FF6B00] transition-colors leading-tight">{sys.label}</p>
-                <p className="text-[#8E8E93] text-xs">{sys.desc}</p>
-              </div>
-            ))}
+          <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Sistemas próprios</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {systems.map((sys, i) => {
+              const Icon = sys.icon
+              return (
+                <div key={i}
+                  className="flex flex-col gap-2 p-4 rounded-xl card-premium group cursor-default"
+                  style={{ animationDelay: `${0.1 * i + 0.2}s` }}>
+                  <div className="icon-box">
+                    <Icon size={18} />
+                  </div>
+                  <p className="text-white font-semibold text-sm group-hover:text-[#FF6B00] transition-colors leading-tight">{sys.label}</p>
+                  <p className="text-[#8E8E93] text-xs">{sys.desc}</p>
+                </div>
+              )
+            })}
           </div>
         </div>
 
-        {/* Right */}
-        <div className="w-72 flex flex-col gap-4 animate-slide-right delay-300">
-          {/* TI + IA destaque */}
-          <div className="p-6 rounded-2xl glow-orange"
+        <div className="slide-sidebar flex flex-col gap-4 animate-slide-right delay-300">
+          <div className="p-5 rounded-2xl glow-orange"
             style={{ background: 'rgba(255,107,0,0.08)', border: '1px solid rgba(255,107,0,0.4)' }}>
-            <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-3">Equipe interna dedicada</p>
+            <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-3 flex items-center gap-2">
+              <Cpu size={12} /> Equipe interna dedicada
+            </p>
             <div className="flex gap-3">
               {['TI', 'Inteligência Artificial'].map((tag, i) => (
-                <div key={i} className="flex-1 py-3 rounded-xl text-center"
+                <div key={i} className="flex-1 py-2.5 rounded-xl text-center"
                   style={{ background: 'rgba(255,107,0,0.1)', border: '1px solid rgba(255,107,0,0.2)' }}>
                   <p className="text-[#FF6B00] font-bold text-sm">{tag}</p>
                 </div>
@@ -56,16 +80,16 @@ export default function S09Tecnologia() {
             </div>
           </div>
 
-          <div className="p-5 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
-            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Objetivo</p>
-            <p className="text-white text-sm leading-relaxed">
-              Escalar operação com <span style={{ color: '#FF6B00' }}>eficiência e previsibilidade</span> — sem dependência de fornecedores externos.
-            </p>
-          </div>
-
-          <div className="p-4 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
-            <p className="text-xs text-[#8E8E93] uppercase tracking-widest mb-2">Processos</p>
-            <p className="text-[#FF6B00] font-bold">Automatizados</p>
+          <div className="flex-1" style={{ minHeight: 160 }}>
+            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Maturidade por módulo</p>
+            <ResponsiveContainer width="100%" height="100%">
+              <RadarChart data={techScore}>
+                <PolarGrid stroke="#2C2C2E" />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: '#8E8E93', fontSize: 10 }} />
+                <Radar dataKey="A" stroke="#FF6B00" fill="#FF6B00" fillOpacity={0.12} strokeWidth={2} />
+                <Tooltip content={<CustomTooltip />} />
+              </RadarChart>
+            </ResponsiveContainer>
           </div>
 
           <blockquote className="border-l-2 border-[#FF6B00] pl-4">

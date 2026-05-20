@@ -1,26 +1,33 @@
 const sizeMap = {
-  xs: { img: 60,  text: 11 },
-  sm: { img: 90,  text: 13 },
-  md: { img: 130, text: 15 },
-  lg: { img: 180, text: 18 },
-  xl: { img: 240, text: 22 },
+  xs: { img: 60  },
+  sm: { img: 90  },
+  md: { img: 130 },
+  lg: { img: 180 },
+  xl: { img: 240 },
 }
 
-/* variant="full"  → logo PNG completa com animação (padrão)
-   variant="icon"  → só ícone/símbolo menor
-   variant="hero"  → grande centralizada */
+const responsiveClamp = {
+  xs: 'clamp(36px, 5vw, 60px)',
+  sm: 'clamp(54px, 7vw, 90px)',
+  md: 'clamp(80px, 10vw, 130px)',
+  lg: 'clamp(100px, 14vw, 180px)',
+  xl: 'clamp(130px, 18vw, 240px)',
+}
+
 export default function LogoTecle({ size = 'md', variant = 'full', animated = true }) {
-  const s = sizeMap[size] || sizeMap.md
+  const clamp = responsiveClamp[size] || responsiveClamp.md
 
   if (variant === 'hero') {
+    const heroClamp = clamp.replace(/(\d+)px/g, (_, n) => `${Math.round(Number(n) * 1.1)}px`)
     return (
       <div className="flex flex-col items-center">
         <img
           src="/logo-tecle.png"
           alt="Tecle Motos"
           style={{
-            height: s.img * 1.1,
+            height: heroClamp,
             objectFit: 'contain',
+            maxWidth: '100%',
             animation: animated ? 'tecle-float 4s ease-in-out 0.5s infinite, tecle-glow 3s ease-in-out infinite' : 'none',
             filter: 'drop-shadow(0 0 8px rgba(255,107,0,0.4))',
           }}
@@ -32,7 +39,7 @@ export default function LogoTecle({ size = 'md', variant = 'full', animated = tr
 
   if (variant === 'icon') {
     return (
-      <div style={{ height: s.img * 0.5, display: 'inline-flex', alignItems: 'center' }}>
+      <div style={{ height: `calc(${clamp} * 0.5)`, display: 'inline-flex', alignItems: 'center' }}>
         <img
           src="/logo-tecle.png"
           alt="Tecle Motos"
@@ -48,15 +55,15 @@ export default function LogoTecle({ size = 'md', variant = 'full', animated = tr
     )
   }
 
-  // full (default)
   return (
-    <div className="flex items-center select-none" style={{ height: s.img * 0.55 }}>
+    <div className="flex items-center select-none" style={{ height: `calc(${clamp} * 0.55)` }}>
       <img
         src="/logo-tecle.png"
         alt="Tecle Motos"
         style={{
           height: '100%',
           objectFit: 'contain',
+          maxWidth: '100%',
           animation: animated
             ? 'tecle-float 4s ease-in-out 0.5s infinite, tecle-glow 3s ease-in-out infinite'
             : 'none',

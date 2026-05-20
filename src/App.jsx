@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import './index.css'
 import SlideNav from './components/SlideNav'
+import SplashScreen from './components/SplashScreen'
 import S01Cover from './slides/S01Cover'
 import S02Momento from './slides/S02Momento'
 import S03QuemSomos from './slides/S03QuemSomos'
@@ -38,6 +39,7 @@ const SLIDE_TITLES = [
 ]
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(true)
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
   const [animating, setAnimating] = useState(false)
@@ -68,6 +70,7 @@ export default function App() {
 
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#0A0A0A]">
+      {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
       {/* Slide content */}
       <div
         key={current}
