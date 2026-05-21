@@ -67,7 +67,7 @@ export default function S06Autoridade() {
               <TrendingUp size={12} color="#FF6B00" />
               Profissionais formados / ano
             </p>
-            <div style={{ height: 160 }}>
+            <div style={{ height: 140, minHeight: 100 }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={trainingData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <XAxis dataKey="ano" tick={{ fill: '#8E8E93', fontSize: 11 }} axisLine={false} tickLine={false} />

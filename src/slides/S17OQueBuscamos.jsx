@@ -69,7 +69,7 @@ export default function S17OQueBuscamos() {
             <p className="text-[#AEAEB2] text-sm">Suportar aceleração mantendo disciplina operacional e ganho de escala.</p>
           </div>
 
-          <div style={{ height: 180 }}>
+          <div style={{ height: 160, minHeight: 110 }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Alocação prevista dos R$5M</p>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>

@@ -1,12 +1,12 @@
 const nodes = [
-  { id: 'tm',    label: 'TM ELÉTRICAS',       sub: 'Importação + Atacado',    color: '#FF6B00', highlight: true },
-  { id: 'tecle', label: 'TECLE MOTOS',         sub: 'Varejo + Distribuição',   color: '#FFFFFF', highlight: false },
-  { id: 'at',    label: 'ASSISTÊNCIA TÉCNICA', sub: 'Pós-venda especializado', color: '#AEAEB2', highlight: false },
-  { id: 'tb',    label: 'TECLEBOM',            sub: 'Proteção Veicular',       color: '#AEAEB2', highlight: false },
-  { id: 'cf',    label: 'CLIENTE FINAL',       sub: 'Experiência completa',    color: '#8E8E93', highlight: false },
+  { id: 'tm',    label: 'TM ELÉTRICAS',       sub: 'Importação + Atacado',              color: '#FF6B00', highlight: true },
+  { id: 'tecle', label: 'TECLE MOTOS',         sub: 'Varejo + Distribuição',             color: '#FFFFFF', highlight: false },
+  { id: 'at',    label: 'ASSISTÊNCIA TÉCNICA', sub: 'Pós-venda + Capacitação Técnica',   color: '#AEAEB2', highlight: false },
+  { id: 'tb',    label: 'TECLEBOM',            sub: 'Proteção Veicular',                 color: '#AEAEB2', highlight: false },
+  { id: 'cf',    label: 'CLIENTE FINAL',       sub: 'Experiência completa',              color: '#8E8E93', highlight: false },
 ]
 
-const tags = ['Importação', 'Atacado', 'Varejo', 'Pós-venda', 'Proteção', 'Tecnologia']
+const tags = ['Importação', 'Atacado', 'Varejo', 'Pós-venda', 'Proteção', 'Tecnologia', 'Capacitação']
 
 export default function S04Ecossistema() {
   return (
@@ -53,6 +53,7 @@ export default function S04Ecossistema() {
               {[
                 ['TM importa e abastece.', 'Supply chain sob controle.'],
                 ['Tecle distribui e monetiza.', 'Rede de 22 pontos.'],
+                ['TM forma e capacita.', 'Sem treinamento, não há escala.'],
                 ['Grupo captura margem', 'em toda a cadeia.'],
               ].map(([line1, line2], i) => (
                 <div key={i} className="flex gap-3">

@@ -1,29 +1,20 @@
+import { useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
-import { RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer, Tooltip } from 'recharts'
 
-const validated = ['Produto', 'Distribuição', 'Canais de venda', 'Operação', 'Qualidade', 'Pós-venda', 'Tecnologia', 'Demanda']
-
-const radarData = [
-  { subject: 'Produto',      score: 95 },
-  { subject: 'Distribuição', score: 92 },
-  { subject: 'Canais',       score: 88 },
-  { subject: 'Operação',     score: 90 },
-  { subject: 'Qualidade',    score: 96 },
-  { subject: 'Tecnologia',   score: 85 },
-  { subject: 'Demanda',      score: 93 },
-  { subject: 'Pós-venda',    score: 91 },
+const validated = [
+  { label: 'Produto',         desc: 'Linha validada em campo com índice de problemas ≈ 0% no último container' },
+  { label: 'Distribuição',    desc: '22 pontos de venda ativos consolidados em 4 canais estruturados' },
+  { label: 'Canais de venda', desc: 'Atacado, varejo próprio, shopping centers, supermercados e home centers' },
+  { label: 'Operação',        desc: 'Processos consolidados com ciclo de giro atacado inferior a 30 dias' },
+  { label: 'Qualidade',       desc: 'Controle de qualidade na importação com rastreabilidade e padrão técnico' },
+  { label: 'Tecnologia',      desc: 'ERP, CRM e IA proprietários em operação contínua e integrada' },
+  { label: 'Demanda',         desc: 'Demanda comprovada e recorrente nos 22 pontos de distribuição ativos' },
+  { label: 'Pós-venda',       desc: 'Assistência técnica reconhecida como referência no segmento de elétricas' },
 ]
 
-const CustomTooltip = ({ active, payload }) => {
-  if (!active || !payload?.length) return null
-  return (
-    <div className="px-3 py-2 rounded-lg" style={{ background: '#1C1C1E', border: '1px solid #FF6B00' }}>
-      <p className="text-white font-bold text-sm">{payload[0]?.value}% validado</p>
-    </div>
-  )
-}
-
 export default function S12Oportunidade() {
+  const [hovered, setHovered] = useState(null)
+
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden slide-pad"
       style={{ background: '#0A0A0A' }}>
@@ -39,31 +30,30 @@ export default function S12Oportunidade() {
       </div>
 
       <div className="slide-row flex-1 min-h-0 items-center">
-        <div className="flex-1 flex flex-col lg:flex-row gap-4 animate-slide-left delay-200">
-          <div className="flex-1">
-            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">A TM já validou</p>
-            <div className="grid grid-cols-2 gap-2 sm:gap-3">
-              {validated.map((item, i) => (
-                <div key={i}
-                  className="flex items-center gap-3 px-3 sm:px-4 py-2.5 rounded-xl card-premium group cursor-default">
-                  <CheckCircle2 size={16} color="#FF6B00" className="flex-shrink-0" />
-                  <span className="text-white text-xs sm:text-sm font-medium group-hover:text-[#FF6B00] transition-colors">{item}</span>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div className="flex-1 animate-slide-left delay-200">
+          <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">A TM já validou</p>
+          <div className="grid grid-cols-2 gap-2 sm:gap-3">
+            {validated.map((item, i) => (
+              <div key={i}
+                className="relative flex items-center gap-3 px-3 sm:px-4 py-2.5 rounded-xl card-premium group cursor-default"
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <CheckCircle2 size={15} color="#FF6B00" className="flex-shrink-0" />
+                <span className="text-white text-xs sm:text-sm font-medium group-hover:text-[#FF6B00] transition-colors leading-tight">
+                  {item.label}
+                </span>
 
-          <div style={{ width: '100%', maxWidth: 260, height: 220 }} className="mx-auto lg:mx-0">
-            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Nível de validação</p>
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={radarData} outerRadius="75%">
-                <PolarGrid stroke="#2C2C2E" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: '#8E8E93', fontSize: 9 }} />
-                <PolarRadiusAxis angle={30} domain={[60, 100]} tick={false} axisLine={false} />
-                <Radar dataKey="score" stroke="#FF6B00" fill="#FF6B00" fillOpacity={0.18} strokeWidth={2} dot={{ fill: '#FF6B00', r: 3 }} />
-                <Tooltip content={<CustomTooltip />} />
-              </RadarChart>
-            </ResponsiveContainer>
+                {hovered === i && (
+                  <div className="absolute bottom-full left-0 mb-2 z-20 w-56 p-2.5 rounded-lg text-xs pointer-events-none"
+                    style={{ background: '#1C1C1E', border: '1px solid rgba(255,107,0,0.45)', color: '#AEAEB2', lineHeight: 1.5 }}>
+                    {item.desc}
+                    <div className="absolute top-full left-6 w-0 h-0"
+                      style={{ borderLeft: '5px solid transparent', borderRight: '5px solid transparent', borderTop: '5px solid rgba(255,107,0,0.45)' }} />
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </div>
 

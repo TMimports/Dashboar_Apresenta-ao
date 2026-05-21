@@ -53,7 +53,7 @@ export default function S18PorQueTM() {
             ))}
           </div>
 
-          <div className="mt-4" style={{ height: 160 }}>
+          <div className="mt-4" style={{ height: 140, minHeight: 100 }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Crescimento histórico comprovado</p>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={growthData} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>

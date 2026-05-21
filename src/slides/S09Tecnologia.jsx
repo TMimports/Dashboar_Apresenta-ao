@@ -80,7 +80,7 @@ export default function S09Tecnologia() {
             </div>
           </div>
 
-          <div className="flex-1" style={{ minHeight: 160 }}>
+          <div style={{ height: 150, minHeight: 100 }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Maturidade por módulo</p>
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={techScore}>

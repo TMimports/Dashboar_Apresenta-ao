@@ -44,6 +44,8 @@ export default function App() {
   const [current, setCurrent] = useState(0)
   const [direction, setDirection] = useState(1)
   const [animating, setAnimating] = useState(false)
+  const [touchStartX, setTouchStartX] = useState(null)
+  const [touchStartY, setTouchStartY] = useState(null)
 
   const goTo = useCallback((idx) => {
     if (animating || idx === current) return
@@ -67,6 +69,22 @@ export default function App() {
     return () => window.removeEventListener('keydown', handler)
   }, [next, prev])
 
+  const handleTouchStart = useCallback((e) => {
+    setTouchStartX(e.touches[0].clientX)
+    setTouchStartY(e.touches[0].clientY)
+  }, [])
+
+  const handleTouchEnd = useCallback((e) => {
+    if (touchStartX === null) return
+    const dx = touchStartX - e.changedTouches[0].clientX
+    const dy = touchStartY - e.changedTouches[0].clientY
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
+      dx > 0 ? next() : prev()
+    }
+    setTouchStartX(null)
+    setTouchStartY(null)
+  }, [touchStartX, touchStartY, next, prev])
+
   const CurrentSlide = SLIDES[current]
 
   return (
@@ -76,6 +94,8 @@ export default function App() {
       <div
         key={current}
         className="w-full h-full"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         style={{
           animation: `${direction > 0 ? 'slideInRight' : 'slideInLeft'} 0.35s ease-out forwards`,
         }}

@@ -1,8 +1,8 @@
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, LabelList } from 'recharts'
 
 const data = [
-  { label: 'Atual',       containers: 20, resultado: 6,  fill: '#3A3A3C', fillR: '#994000' },
-  { label: 'Com Funding', containers: 40, resultado: 12, fill: '#FF6B00', fillR: '#FF8C33' },
+  { cenario: 'Cenário Atual', resultado: 6,  fill: '#3A3A3C' },
+  { cenario: 'Com Funding',   resultado: 12, fill: '#FF6B00' },
 ]
 
 const CustomTip = ({ active, payload, label }) => {
@@ -10,8 +10,7 @@ const CustomTip = ({ active, payload, label }) => {
   return (
     <div className="px-4 py-3 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #FF6B00' }}>
       <p className="text-[#AEAEB2] text-xs mb-1">{label}</p>
-      <p className="text-white font-bold">{payload[0]?.value} containers/ano</p>
-      {payload[1] && <p className="text-[#FF6B00] font-bold">≈ R${payload[1]?.value}M bruto anual</p>}
+      <p className="text-[#FF6B00] font-bold">≈ R${payload[0]?.value}M bruto anual</p>
     </div>
   )
 }
@@ -28,68 +27,69 @@ export default function S14ImpactoEconomico() {
 
       <div className="mb-4 md:mb-6 animate-fade-up">
         <p className="text-[#FF6B00] text-xs font-medium tracking-widest uppercase mb-2">14 / Impacto Econômico</p>
-        <h2 className="slide-title text-white">Escala gera eficiência</h2>
+        <h2 className="slide-title text-white">Escala gera eficiência econômica</h2>
       </div>
 
       <div className="slide-row flex-1 min-h-0">
         <div className="flex flex-col gap-3 slide-sidebar animate-slide-left delay-200">
           <div className="p-5 sm:p-6 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Cenário Atual</p>
-            <p className="text-3xl sm:text-4xl font-black text-white">~20</p>
-            <p className="text-[#8E8E93] text-sm">containers/ano</p>
-            <div className="mt-3 pt-3 border-t border-[#2C2C2E]">
-              <p className="text-xl sm:text-2xl font-black text-white">≈ R$6M</p>
-              <p className="text-[#8E8E93] text-xs">resultado bruto anual</p>
+            <p className="text-3xl sm:text-4xl font-black text-white">≈ R$6M</p>
+            <p className="text-[#8E8E93] text-sm">resultado bruto anual</p>
+            <div className="mt-2 pt-2 border-t border-[#2C2C2E]">
+              <p className="text-[#8E8E93] text-xs">~20 containers/ano</p>
             </div>
           </div>
 
           <div className="p-5 sm:p-6 rounded-2xl glow-orange"
             style={{ background: 'rgba(255,107,0,0.08)', border: '1px solid rgba(255,107,0,0.4)' }}>
             <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-3">Com Funding</p>
-            <p className="text-3xl sm:text-4xl font-black text-[#FF6B00]">~40</p>
-            <p className="text-[#AEAEB2] text-sm">containers/ano</p>
-            <div className="mt-3 pt-3 border-t border-[rgba(255,107,0,0.2)]">
-              <p className="text-xl sm:text-2xl font-black text-[#FF6B00]">≈ R$12M</p>
-              <p className="text-[#AEAEB2] text-xs">potencial bruto anual</p>
+            <p className="text-3xl sm:text-4xl font-black text-[#FF6B00]">≈ R$12M</p>
+            <p className="text-[#AEAEB2] text-sm">potencial bruto anual</p>
+            <div className="mt-2 pt-2 border-t border-[rgba(255,107,0,0.2)]">
+              <p className="text-[#AEAEB2] text-xs">~40 containers/ano</p>
             </div>
           </div>
 
           <div className="p-4 rounded-xl text-center" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <p className="text-[#FF6B00] font-black text-2xl sm:text-3xl">2×</p>
-            <p className="text-[#8E8E93] text-xs">resultado potencial</p>
+            <p className="text-[#8E8E93] text-xs">resultado econômico potencial</p>
           </div>
         </div>
 
         <div className="flex-1 flex flex-col animate-fade-in delay-300">
-          <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Comparativo de escala</p>
-          <div className="flex-1" style={{ minHeight: 200 }}>
+          <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Resultado bruto anual — R$ milhões</p>
+          <div className="flex-1" style={{ minHeight: 180 }}>
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data} margin={{ top: 24, right: 20, left: -10, bottom: 10 }} barGap={8}>
-                <XAxis dataKey="label" tick={{ fill: '#8E8E93', fontSize: 12 }} axisLine={false} tickLine={false} height={40} />
-                <YAxis tick={{ fill: '#8E8E93', fontSize: 11 }} axisLine={false} tickLine={false} />
+              <BarChart data={data} margin={{ top: 28, right: 20, left: -10, bottom: 10 }}>
+                <XAxis dataKey="cenario" tick={{ fill: '#AEAEB2', fontSize: 12, fontWeight: 600 }} axisLine={false} tickLine={false} />
+                <YAxis
+                  tick={{ fill: '#8E8E93', fontSize: 11 }}
+                  axisLine={false} tickLine={false}
+                  tickFormatter={v => `R$${v}M`}
+                />
                 <Tooltip content={<CustomTip />} cursor={{ fill: 'rgba(255,107,0,0.05)' }} />
-                <Bar dataKey="containers" radius={[6,6,0,0]} maxBarSize={72} name="containers">
+                <Bar dataKey="resultado" radius={[8, 8, 0, 0]} maxBarSize={80}>
                   {data.map((d, i) => <Cell key={i} fill={d.fill} />)}
-                  <LabelList dataKey="containers" position="top"
-                    style={{ fill: '#AEAEB2', fontSize: 13, fontWeight: 700 }}
-                    formatter={v => `${v}`} />
-                </Bar>
-                <Bar dataKey="resultado" radius={[6,6,0,0]} maxBarSize={72} name="R$M">
-                  {data.map((d, i) => <Cell key={i} fill={d.fillR} />)}
                   <LabelList dataKey="resultado" position="top"
-                    style={{ fill: '#FF6B00', fontSize: 13, fontWeight: 700 }}
+                    style={{ fill: '#FF6B00', fontSize: 14, fontWeight: 800 }}
                     formatter={v => `R$${v}M`} />
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
           </div>
+
+          <div className="mt-3 p-4 rounded-xl" style={{ background: 'rgba(255,107,0,0.06)', border: '1px solid rgba(255,107,0,0.2)' }}>
+            <p className="text-[#FF6B00] font-bold text-sm">A mesma estrutura. O dobro de resultado.</p>
+            <p className="text-[#8E8E93] text-xs mt-1">Escala não duplica o custo — duplica a eficiência.</p>
+          </div>
         </div>
 
         <div className="slide-sidebar-sm flex flex-col gap-4 justify-center animate-slide-right delay-300">
           <div className="p-4 sm:p-5 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
-            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">O aumento de escala</p>
+            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Ganhos econômicos da escala</p>
             <div className="flex flex-col gap-2">
-              {['Amplia rentabilidade', 'Fortalece negociação internacional', 'Reduz riscos por previsibilidade'].map((item, i) => (
+              {['Amplia rentabilidade por container', 'Fortalece negociação internacional', 'Reduz riscos pela previsibilidade'].map((item, i) => (
                 <div key={i} className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#FF6B00' }} />
                   <p className="text-[#AEAEB2] text-xs sm:text-sm">{item}</p>
@@ -98,7 +98,7 @@ export default function S14ImpactoEconomico() {
             </div>
           </div>
           <blockquote className="border-l-2 border-[#FF6B00] pl-4">
-            <p className="text-xs text-[#AEAEB2] italic">"Mais escala significa mais margem, mais previsibilidade e maior eficiência."</p>
+            <p className="text-xs text-[#AEAEB2] italic">"Mais escala significa mais margem, mais previsibilidade e maior eficiência econômica."</p>
           </blockquote>
         </div>
       </div>

@@ -66,7 +66,7 @@ export default function S15RiscoControlado() {
           </div>
         </div>
 
-        <div style={{ width: '100%', maxWidth: 260, height: 220 }} className="mx-auto lg:mx-0 flex-shrink-0 animate-fade-in delay-300">
+        <div style={{ width: '100%', maxWidth: 240, height: 180, minHeight: 140 }} className="mx-auto lg:mx-0 flex-shrink-0 animate-fade-in delay-300">
           <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2 flex items-center gap-1">
             <ShieldCheck size={12} color="#FF6B00" /> Score de risco controlado
           </p>

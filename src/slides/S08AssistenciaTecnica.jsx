@@ -52,7 +52,7 @@ export default function S08AssistenciaTecnica() {
             </p>
           </div>
 
-          <div style={{ height: 180 }}>
+          <div style={{ height: 150, minHeight: 100 }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Indicadores de pós-venda</p>
             <ResponsiveContainer width="100%" height="100%">
               <RadialBarChart cx="50%" cy="50%" innerRadius="20%" outerRadius="90%"

@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ChevronLeft, ChevronRight, LayoutGrid, X } from 'lucide-react'
 import LogoTMEletricas from './LogoTMEletricas'
 import LogoTecle from './LogoTecle'
 
 export default function SlideNav({ current, total, titles, onNext, onPrev, onGoTo }) {
   const [showMenu, setShowMenu] = useState(false)
+  const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640)
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth < 640)
+    window.addEventListener('resize', handler)
+    return () => window.removeEventListener('resize', handler)
+  }, [])
 
   return (
     <>
@@ -39,7 +46,7 @@ export default function SlideNav({ current, total, titles, onNext, onPrev, onGoT
             {Array.from({ length: total }).map((_, i) => {
               const isActive = i === current
               const isVisible = Math.abs(i - current) <= 4 || i === 0 || i === total - 1
-              if (!isVisible && window.innerWidth < 640) return null
+              if (!isVisible && isMobile) return null
               return (
                 <button
                   key={i}

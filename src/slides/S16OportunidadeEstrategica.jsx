@@ -66,7 +66,7 @@ export default function S16OportunidadeEstrategica() {
             </p>
           </div>
 
-          <div style={{ height: 140 }}>
+          <div style={{ height: 120, minHeight: 90 }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Potencial de vendas (índice)</p>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={projData} margin={{ top: 16, right: 10, left: -20, bottom: 0 }}>

@@ -36,7 +36,7 @@ export default function S05Distribuicao() {
         <div className="flex flex-col gap-3 slide-sidebar animate-slide-left delay-200">
           <div className="p-5 sm:p-6 rounded-2xl text-center glow-orange"
             style={{ background: 'rgba(255,107,0,0.08)', border: '1px solid rgba(255,107,0,0.4)' }}>
-            <p className="text-5xl sm:text-7xl font-black text-[#FF6B00] leading-none">22</p>
+            <p className="font-black text-[#FF6B00] leading-none" style={{ fontSize: 'clamp(2.5rem, 8vw, 4.5rem)' }}>22</p>
             <p className="text-white font-semibold mt-2 text-sm sm:text-base">Pontos de Venda Ativos</p>
             <p className="text-[#8E8E93] text-xs mt-1">Distribuídos em 4 canais</p>
           </div>
