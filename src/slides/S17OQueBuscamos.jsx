@@ -1,5 +1,5 @@
 import { TrendingUp, Building, Globe, RefreshCw, Rocket, Handshake } from 'lucide-react'
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts'
 
 const objetivos = [
   { icon: TrendingUp, label: 'Funding para crescimento' },
@@ -60,39 +60,45 @@ export default function S17OQueBuscamos() {
           </div>
         </div>
 
-        <div className="slide-sidebar-lg flex flex-col gap-4 animate-slide-right delay-300">
-          <div className="p-6 sm:p-8 rounded-2xl text-center glow-orange"
+        <div className="slide-sidebar-lg flex flex-col gap-3 animate-slide-right delay-300">
+          <div className="p-4 sm:p-5 rounded-2xl text-center glow-orange"
             style={{ background: 'rgba(255,107,0,0.08)', border: '1px solid rgba(255,107,0,0.5)' }}>
-            <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-3">Valor pretendido</p>
-            <p className="text-5xl sm:text-6xl font-black text-[#FF6B00] leading-none">R$5M</p>
-            <div className="w-16 h-0.5 my-3 mx-auto" style={{ background: 'rgba(255,107,0,0.4)' }} />
+            <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-2">Valor pretendido</p>
+            <p className="text-4xl sm:text-5xl font-black text-[#FF6B00] leading-none">R$5M</p>
+            <div className="w-16 h-0.5 my-2 mx-auto" style={{ background: 'rgba(255,107,0,0.4)' }} />
             <p className="text-[#AEAEB2] text-sm">Suportar aceleração mantendo disciplina operacional e ganho de escala.</p>
           </div>
 
-          <div style={{ height: 160, minHeight: 110 }}>
+          <div>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Alocação prevista dos R$5M</p>
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={allocationData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={40}
-                  outerRadius={68}
-                  paddingAngle={3}
-                  dataKey="value"
-                >
-                  {allocationData.map((entry, i) => (
-                    <Cell key={i} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-                <Legend
-                  formatter={(value) => <span style={{ color: '#8E8E93', fontSize: 10 }}>{value}</span>}
-                  iconSize={8}
-                />
-              </PieChart>
-            </ResponsiveContainer>
+            <div style={{ height: 130, minHeight: 90, overflow: 'hidden' }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={allocationData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={28}
+                    outerRadius={52}
+                    paddingAngle={3}
+                    dataKey="value"
+                  >
+                    {allocationData.map((entry, i) => (
+                      <Cell key={i} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip content={<CustomTooltip />} />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 mt-2">
+              {allocationData.map((item, i) => (
+                <div key={i} className="flex items-center gap-1.5 min-w-0">
+                  <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: item.color }} />
+                  <span className="text-[#8E8E93] truncate" style={{ fontSize: 10 }}>{item.name} {item.value}%</span>
+                </div>
+              ))}
+            </div>
           </div>
 
           <blockquote className="border-l-2 border-[#FF6B00] pl-4">

@@ -105,10 +105,10 @@ html, body, #root {
 .recharts-tooltip-item  { color: #FFFFFF !important; font-size: 14px !important; font-weight: 600 !important; }
 
 /* Slide layout responsivo */
-.slide-pad { padding: 0.875rem; }
-@media (min-width: 480px)  { .slide-pad { padding: 1.25rem; } }
-@media (min-width: 640px)  { .slide-pad { padding: 2rem; } }
-@media (min-width: 1024px) { .slide-pad { padding: 2.5rem 4rem; } }
+.slide-pad { padding: 0.875rem 0.875rem 5rem; }
+@media (min-width: 480px)  { .slide-pad { padding: 1.25rem 1.25rem 5rem; } }
+@media (min-width: 640px)  { .slide-pad { padding: 1.5rem 2rem 5rem; } }
+@media (min-width: 1024px) { .slide-pad { padding: 2rem 3.5rem 5rem; } }
 
 /* Mobile/tablet: permite scroll interno em vez de cortar conteúdo */
 @media (max-width: 1023px) {
@@ -117,6 +117,16 @@ html, body, #root {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
   }
+}
+
+/* Altura segura de gráfico por breakpoint */
+.chart-h-sm { height: 110px; }
+.chart-h-md { height: 140px; }
+.chart-h-lg { height: 180px; }
+@media (min-width: 1280px) {
+  .chart-h-sm { height: 130px; }
+  .chart-h-md { height: 170px; }
+  .chart-h-lg { height: 220px; }
 }
 
 .slide-title { font-size: 1.25rem; font-weight: 900; line-height: 1.15; }
@@ -138,7 +148,7 @@ html, body, #root {
 
 /* Telas muito pequenas (< 375px) */
 @media (max-width: 374px) {
-  .slide-pad { padding: 0.75rem; }
+  .slide-pad { padding: 0.75rem 0.75rem 5rem; }
   .slide-title { font-size: 1.1rem; }
   .icon-box { width: 2.25rem; height: 2.25rem; }
 }

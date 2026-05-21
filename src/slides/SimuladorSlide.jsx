@@ -274,7 +274,7 @@ export default function SimuladorSlide() {
           </div>
 
           {/* Gráfico principal */}
-          <div style={{ flex: 1, minHeight: 0 }}>
+          <div style={{ flex: 1, minHeight: 160, maxHeight: 320, overflow: 'hidden' }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={rows} margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                 <defs>

@@ -72,7 +72,7 @@ export default function S11UnitEconomics() {
         </div>
 
         <div className="flex-1 flex flex-col gap-4 animate-fade-in delay-300">
-          <div style={{ height: 110, minHeight: 80 }}>
+          <div style={{ height: 110, minHeight: 80, overflow: 'hidden' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Ciclo operacional (dias)</p>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={cycleData} layout="vertical" margin={{ top: 5, right: 40, left: 10, bottom: 5 }}>
@@ -87,7 +87,7 @@ export default function S11UnitEconomics() {
             </ResponsiveContainer>
           </div>
 
-          <div style={{ height: 110, minHeight: 80 }}>
+          <div style={{ height: 110, minHeight: 80, overflow: 'hidden' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Tendência de margem bruta (%)</p>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={marginTrend} margin={{ top: 5, right: 10, left: -20, bottom: 0 }}>

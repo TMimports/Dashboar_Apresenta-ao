@@ -37,7 +37,7 @@ export default function S08AssistenciaTecnica() {
 
       <div className="slide-row flex-1 min-h-0 items-center">
         <div className="slide-sidebar flex flex-col gap-4 animate-slide-left delay-200">
-          <div className="p-5 sm:p-6 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
+          <div className="p-4 sm:p-5 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Estrutura técnica</p>
             <p className="text-white text-sm leading-relaxed">
               Estrutura técnica <span style={{ color: '#FF6B00' }}>consolidada</span>, processos internos e profissionais especializados.
@@ -52,7 +52,7 @@ export default function S08AssistenciaTecnica() {
             </p>
           </div>
 
-          <div style={{ height: 150, minHeight: 100 }}>
+          <div style={{ height: 130, minHeight: 90, overflow: 'hidden' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Indicadores de pós-venda</p>
             <ResponsiveContainer width="100%" height="100%">
               <RadialBarChart cx="50%" cy="50%" innerRadius="20%" outerRadius="90%"

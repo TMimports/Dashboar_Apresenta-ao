@@ -52,7 +52,7 @@ export default function S07Qualidade() {
             <p className="text-[#AEAEB2] text-sm mt-2">índice de problemas</p>
           </div>
 
-          <div style={{ height: 140, minHeight: 100 }}>
+          <div style={{ height: 140, minHeight: 100, overflow: 'hidden' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Score de qualidade</p>
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={radarData}>

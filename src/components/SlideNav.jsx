@@ -16,13 +16,14 @@ export default function SlideNav({ current, total, titles, onNext, onPrev, onGoT
   return (
     <>
       {/* Bottom nav bar */}
-      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-between px-3 sm:px-8 py-3 sm:py-4 z-50"
-        style={{ background: 'linear-gradient(to top, rgba(10,10,10,0.98), transparent)' }}>
+      <div className="fixed bottom-0 left-0 right-0 flex items-center justify-between px-3 sm:px-8 h-14 sm:h-16 z-50"
+        style={{ background: 'linear-gradient(to top, #0A0A0A 55%, rgba(10,10,10,0.85) 80%, transparent)' }}>
 
         {/* Prev */}
         <button
           onClick={onPrev}
           disabled={current === 0}
+          style={{ touchAction: 'manipulation' }}
           className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all
             disabled:opacity-20 disabled:cursor-not-allowed
             text-[#AEAEB2] hover:text-white hover:bg-[#2C2C2E]"
@@ -67,6 +68,7 @@ export default function SlideNav({ current, total, titles, onNext, onPrev, onGoT
         <button
           onClick={onNext}
           disabled={current === total - 1}
+          style={{ touchAction: 'manipulation' }}
           className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium transition-all
             disabled:opacity-20 disabled:cursor-not-allowed
             text-[#AEAEB2] hover:text-white hover:bg-[#2C2C2E]"

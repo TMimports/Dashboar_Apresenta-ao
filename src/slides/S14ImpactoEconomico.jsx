@@ -59,7 +59,7 @@ export default function S14ImpactoEconomico() {
 
         <div className="flex-1 flex flex-col animate-fade-in delay-300">
           <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Resultado bruto anual — R$ milhões</p>
-          <div className="flex-1" style={{ minHeight: 180 }}>
+          <div className="flex-1" style={{ height: 160, minHeight: 120, overflow: 'hidden' }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={data} margin={{ top: 28, right: 20, left: -10, bottom: 10 }}>
                 <XAxis dataKey="cenario" tick={{ fill: '#AEAEB2', fontSize: 12, fontWeight: 600 }} axisLine={false} tickLine={false} />
