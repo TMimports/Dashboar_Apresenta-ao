@@ -165,18 +165,20 @@ export default function SplashScreen({ onDone }) {
           TM GROUP — PLATAFORMA DE MOBILIDADE ELÉTRICA
         </div>
 
-        {/* Logo TM Elétricas */}
+        {/* Logo TM Elétricas — container de largura fixa para eixo consistente */}
         <div style={{
+          width: '100%', maxWidth: 420,
+          display: 'flex', justifyContent: 'center',
           opacity: phase >= 2 ? 1 : 0,
           transform: phase >= 2 ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(20px)',
           transition: 'all 0.7s cubic-bezier(0.34,1.56,0.64,1)',
-          marginBottom: '1.8rem',
+          marginBottom: '1.5rem',
         }}>
           <img
             src="/logo-tm-eletricas.svg"
             alt="TM Elétricas"
             style={{
-              height: 'clamp(90px, 18vw, 170px)',
+              height: 'clamp(80px, 15vw, 140px)',
               objectFit: 'contain',
               filter: 'drop-shadow(0 0 16px rgba(255,107,0,0.7))',
               animation: phase >= 2 ? 'logo-glow 3s ease-in-out infinite' : 'none',
@@ -184,10 +186,10 @@ export default function SplashScreen({ onDone }) {
           />
         </div>
 
-        {/* Conector central com spark */}
+        {/* Conector — mesmo maxWidth das logos para eixo alinhado */}
         <div style={{
           display: 'flex', alignItems: 'center', gap: '1rem',
-          marginBottom: '1.8rem', width: '100%', maxWidth: 380,
+          marginBottom: '1.5rem', width: '100%', maxWidth: 420,
           opacity: phase >= 3 ? 1 : 0,
           transition: 'opacity 0.5s ease',
         }}>
@@ -202,18 +204,20 @@ export default function SplashScreen({ onDone }) {
           <div style={{ flex: 1, height: 1, background: 'linear-gradient(90deg, #FF6B00, transparent)' }} />
         </div>
 
-        {/* Logo Tecle Motos */}
+        {/* Logo Tecle Motos — mesmo container para eixo alinhado */}
         <div style={{
+          width: '100%', maxWidth: 420,
+          display: 'flex', justifyContent: 'center',
           opacity: phase >= 3 ? 1 : 0,
           transform: phase >= 3 ? 'scale(1) translateY(0)' : 'scale(0.7) translateY(15px)',
           transition: 'all 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.1s',
-          marginBottom: '2.5rem',
+          marginBottom: '2rem',
         }}>
           <img
             src="/logo-tecle.png"
             alt="Tecle Motos"
             style={{
-              height: 'clamp(45px, 9vw, 80px)',
+              height: 'clamp(58px, 11vw, 95px)',
               objectFit: 'contain',
               filter: 'drop-shadow(0 0 10px rgba(255,107,0,0.5))',
               animation: phase >= 3 ? 'logo-glow 3.5s ease-in-out 0.4s infinite' : 'none',
