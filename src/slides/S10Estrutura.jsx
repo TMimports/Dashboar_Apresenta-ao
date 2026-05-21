@@ -40,6 +40,7 @@ export default function S10Estrutura() {
                   className="relative flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl card-premium group cursor-default text-center"
                   onMouseEnter={() => setHovered(i)}
                   onMouseLeave={() => setHovered(null)}
+                  style={i === 8 ? { border: '1px solid rgba(255,107,0,0.45)', background: 'rgba(255,107,0,0.05)' } : {}}
                 >
                   <div className="icon-box">
                     <Icon size={16} />

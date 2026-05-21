@@ -1,7 +1,7 @@
 const nodes = [
   { id: 'tm',    label: 'TM ELÉTRICAS',       sub: 'Importação + Atacado',              color: '#FF6B00', highlight: true },
   { id: 'tecle', label: 'TECLE MOTOS',         sub: 'Varejo + Distribuição',             color: '#FFFFFF', highlight: false },
-  { id: 'at',    label: 'ASSISTÊNCIA TÉCNICA', sub: 'Pós-venda + Capacitação Técnica',   color: '#AEAEB2', highlight: false },
+  { id: 'at',    label: 'ASSISTÊNCIA TÉCNICA', sub: 'Pós-venda · Capacitação · Escala',  color: '#AEAEB2', highlight: false },
   { id: 'tb',    label: 'TECLEBOM',            sub: 'Proteção Veicular',                 color: '#AEAEB2', highlight: false },
   { id: 'cf',    label: 'CLIENTE FINAL',       sub: 'Experiência completa',              color: '#8E8E93', highlight: false },
 ]

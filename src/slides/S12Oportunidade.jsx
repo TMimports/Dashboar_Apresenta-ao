@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 
 const validated = [
-  { label: 'Produto',         desc: 'Linha validada em campo com índice de problemas ≈ 0% no último container' },
-  { label: 'Distribuição',    desc: '22 pontos de venda ativos consolidados em 4 canais estruturados' },
-  { label: 'Canais de venda', desc: 'Atacado, varejo próprio, shopping centers, supermercados e home centers' },
-  { label: 'Operação',        desc: 'Processos consolidados com ciclo de giro atacado inferior a 30 dias' },
-  { label: 'Qualidade',       desc: 'Controle de qualidade na importação com rastreabilidade e padrão técnico' },
-  { label: 'Tecnologia',      desc: 'ERP, CRM e IA proprietários em operação contínua e integrada' },
-  { label: 'Demanda',         desc: 'Demanda comprovada e recorrente nos 22 pontos de distribuição ativos' },
-  { label: 'Pós-venda',       desc: 'Assistência técnica reconhecida como referência no segmento de elétricas' },
+  { label: 'Produto',             desc: 'Linha validada em campo com índice de problemas ≈ 0% no último container' },
+  { label: 'Distribuição',        desc: '22 pontos de venda ativos consolidados em 4 canais estruturados' },
+  { label: 'Canais de venda',     desc: 'Atacado, varejo próprio, shopping centers, supermercados e home centers' },
+  { label: 'Operação',            desc: 'Processos consolidados com ciclo de giro atacado inferior a 30 dias' },
+  { label: 'Qualidade',           desc: 'Controle de qualidade na importação com rastreabilidade e padrão técnico' },
+  { label: 'Tecnologia',          desc: 'ERP, CRM e IA proprietários em operação contínua e integrada' },
+  { label: 'Demanda',             desc: 'Demanda comprovada e recorrente nos 22 pontos de distribuição ativos' },
+  { label: 'Pós-venda',           desc: 'Assistência técnica reconhecida como referência no segmento de elétricas' },
+  { label: 'Capacitação Técnica', desc: 'Formação de mão de obra especializada que sustenta operação, pós-venda e crescimento sustentável' },
 ]
 
 export default function S12Oportunidade() {
@@ -67,7 +68,7 @@ export default function S12Oportunidade() {
           </div>
 
           <div className="flex flex-col gap-3">
-            {['A estrutura já existe.', 'A demanda já existe.', 'O time já existe.'].map((line, i) => (
+            {['A estrutura já existe.', 'A demanda já existe.', 'O time já existe.', 'A capacitação já existe.'].map((line, i) => (
               <div key={i} className="flex items-center gap-3 px-4 py-3 rounded-xl"
                 style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
                 <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#FF6B00' }} />

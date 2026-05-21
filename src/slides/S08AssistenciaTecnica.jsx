@@ -40,7 +40,7 @@ export default function S08AssistenciaTecnica() {
           <div className="p-4 sm:p-5 rounded-2xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-3">Estrutura técnica</p>
             <p className="text-white text-sm leading-relaxed">
-              Estrutura técnica <span style={{ color: '#FF6B00' }}>consolidada</span>, processos internos e profissionais especializados.
+              Estrutura técnica <span style={{ color: '#FF6B00' }}>consolidada</span> com profissionais capacitados internamente e processos de qualidade.
             </p>
           </div>
 
@@ -48,7 +48,8 @@ export default function S08AssistenciaTecnica() {
             style={{ background: 'rgba(255,107,0,0.06)', border: '1px solid rgba(255,107,0,0.4)' }}>
             <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-2">Barreira de entrada</p>
             <p className="text-white text-sm leading-relaxed">
-              A assistência técnica é uma barreira importante do setor.
+              A assistência técnica é uma barreira real do setor.{' '}
+              <span style={{ color: '#FF8C33' }}>A formação técnica da equipe é o que torna essa barreira sustentável.</span>
             </p>
           </div>
 
@@ -61,6 +62,14 @@ export default function S08AssistenciaTecnica() {
                 <Tooltip content={<CustomTooltip />} />
               </RadialBarChart>
             </ResponsiveContainer>
+          </div>
+
+          <div className="flex items-center gap-3 px-4 py-3 rounded-xl"
+            style={{ background: 'rgba(255,107,0,0.04)', border: '1px solid rgba(255,107,0,0.2)' }}>
+            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#FF6B00' }} />
+            <p className="text-[#AEAEB2] text-xs sm:text-sm">
+              <span style={{ color: '#FF8C33' }}>Capacitação técnica contínua</span> — profissionais treinados sustentam qualidade e fidelização.
+            </p>
           </div>
 
           <blockquote className="border-l-2 border-[#FF6B00] pl-4">

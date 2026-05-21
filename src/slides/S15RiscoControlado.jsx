@@ -7,7 +7,7 @@ const risks = [
   { label: 'Rede própria',                 desc: '22 pontos com escoamento validado',          score: 88 },
   { label: 'Produto validado',             desc: 'Qualidade comprovada no campo',              score: 92 },
   { label: 'Tecnologia própria',           desc: 'Independência operacional',                  score: 85 },
-  { label: 'Equipe consolidada',           desc: 'Time operacional formado',                   score: 90 },
+  { label: 'Equipe capacitada',             desc: 'Time formado internamente — reduz risco técnico e de pós-venda', score: 90 },
 ]
 
 const radarData = [
@@ -16,7 +16,7 @@ const radarData = [
   { subject: 'Rede própria',    score: 88 },
   { subject: 'Produto',         score: 92 },
   { subject: 'Tecnologia',      score: 85 },
-  { subject: 'Equipe',          score: 90 },
+  { subject: 'Equipe Cap.',     score: 90 },
 ]
 
 const CustomTooltip = ({ active, payload }) => {
@@ -95,6 +95,13 @@ export default function S15RiscoControlado() {
             <p className="text-xs text-[#FF6B00] uppercase tracking-widest font-medium mb-2">Maior risco atual</p>
             <p className="text-white font-bold text-sm leading-snug">
               Crescer <span style={{ color: '#FF6B00' }}>abaixo</span> da demanda existente.
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl" style={{ background: 'rgba(255,107,0,0.04)', border: '1px solid rgba(255,107,0,0.2)' }}>
+            <p className="text-xs text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Capacitação como mitigador</p>
+            <p className="text-[#AEAEB2] text-xs sm:text-sm leading-relaxed">
+              Profissionais treinados reduzem falhas operacionais, garantias acionadas e churn — tornando o risco do pós-venda previsível.
             </p>
           </div>
 
