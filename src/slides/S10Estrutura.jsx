@@ -32,7 +32,7 @@ export default function S10Estrutura() {
 
       <div className="slide-row flex-1 min-h-0">
         <div className="flex-1 animate-fade-in delay-200">
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
             {areas.map((area, i) => {
               const Icon = area.icon
               return (
