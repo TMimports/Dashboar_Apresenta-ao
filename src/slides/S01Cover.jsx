@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Mail, ArrowRight, Zap, Rocket, Bike } from 'lucide-react'
+import { Mail, ArrowRight, Rocket, Bike, Zap } from 'lucide-react'
 
 const ICONS = [
-  { Icon: Rocket, label: 'Aceleração' },
-  { Icon: Bike,   label: 'Moto Elétrica' },
   { Icon: Zap,    label: 'Energia' },
+  { Icon: Bike,   label: 'Scooter Elétrica' },
+  { Icon: Rocket, label: 'Aceleração' },
 ]
 
 export default function S01Cover() {
