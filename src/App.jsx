@@ -9,16 +9,17 @@ import S04Ecossistema from './slides/S04Ecossistema'
 import S05Estrutura  from './slides/S05Estrutura'
 import S06Escala     from './slides/S06Escala'
 import S07Gargalo    from './slides/S07Gargalo'
-import S08Convite    from './slides/S07Convite'
+import S08Convite      from './slides/S07Convite'
+import S09Encerramento from './slides/S09Encerramento'
 
 const SLIDES = [
   S01Cover, S02Historia, S03Fundadores, S04Ecossistema,
-  S05Estrutura, S06Escala, S07Gargalo, S08Convite,
+  S05Estrutura, S06Escala, S07Gargalo, S08Convite, S09Encerramento,
 ]
 
 const SLIDE_TITLES = [
   'Capa', 'Nossa História', 'Corpo Diretor', 'Ecossistema',
-  'Estrutura', 'Calculadora', 'O Gargalo', 'Visão Global',
+  'Estrutura', 'Calculadora', 'O Gargalo', 'Expansão Global', 'Encerramento',
 ]
 
 // Canvas fixo 16:9 — slides sempre renderizados nesse tamanho e escalados para caber na tela

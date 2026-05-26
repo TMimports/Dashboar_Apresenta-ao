@@ -1,70 +1,82 @@
 import { useState } from 'react'
-import { Mail } from 'lucide-react'
+import { Mail, Globe, Shield, ShoppingBag } from 'lucide-react'
 
-const tese = [
+/* ── Blocos de expansão global ──────────────────────────────── */
+const expansao = [
   {
-    n: '01',
-    titulo: 'Trade Finance',
-    detalhe: 'Estruturar linhas de Crédito de Comércio Exterior para neutralizar 3 meses de lead time da China.',
+    Icon: Globe,
+    titulo: 'Tanzânia — Zanzibar & Pemba',
+    tag: 'Convite Governamental',
+    color: '#FF6A00',
+    topicos: [
+      'Convite oficial para implementar transição energética nacional',
+      'Conversão de frota de tuc-tucs para 100% elétrico',
+      'Eletrificação de barcos e retrofit de ônibus a diesel',
+      'Visita institucional realizada à Yadea — líder mundial em e-mobility',
+    ],
   },
   {
-    n: '02',
-    titulo: 'Escala Simultânea',
-    detalhe: 'Capital dispara múltiplos lotes em paralelo — queimando o gargalo de limitação física de containers.',
+    Icon: Shield,
+    titulo: 'Codemar — Maricá, RJ',
+    tag: 'Validação Governamental',
+    color: '#FF8C33',
+    topicos: [
+      'Fornecimento de veículos elétricos à Guarda Municipal de Maricá',
+      'Projeto piloto de substituição de frota em andamento',
+      'Primeira parceria institucional pública validada',
+    ],
   },
   {
-    n: '03',
-    titulo: 'Validação Governamental',
-    detalhe: 'Codemar: frotas elétricas para Guarda Municipal. Projeto piloto de substituição em execução.',
+    Icon: ShoppingBag,
+    titulo: 'Grandes Redes — B2B',
+    tag: 'Expansão Comercial',
+    color: '#AEAEB2',
+    topicos: [
+      'Lojas Mel — expansão B2B ativa e estruturada',
+      'Casas Bahia — pipeline comercial em negociação',
+      'Canal B2B complementa varejo próprio sem canibalização',
+    ],
   },
-  {
-    n: '04',
-    titulo: 'Expansão Global',
-    detalhe: 'Zanzibar & Pemba (Tanzânia): conversão de frota de tuc-tucs, barcos e ônibus. Visita à Yadea realizada.',
-  },
-]
-
-const redes = [
-  { nome: 'Lojas Mel',   status: 'Expansão B2B ativa',    color: '#FF6A00' },
-  { nome: 'Casas Bahia', status: 'Pipeline comercial',     color: '#FF8C33' },
-  { nome: 'Codemar',     status: 'Guarda Municipal',       color: '#AEAEB2' },
-  { nome: 'Yadea Global',status: 'Parceria internacional', color: '#8E8E93' },
 ]
 
 function FotosParceria() {
   const [err04, setErr04] = useState(false)
   const [err05, setErr05] = useState(false)
 
+  if (err04 && err05) return null
+
   return (
-    <div className="flex gap-2 mb-1" style={{ flexShrink: 0 }}>
-      {/* 04.jpg — Lojas Mel */}
+    <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
       {!err04 && (
-        <div className="flex-1 rounded-xl overflow-hidden"
-          style={{ height: 80, border: '1px solid rgba(255,106,0,0.25)', position: 'relative' }}>
+        <div style={{
+          flex: 1, height: 88, borderRadius: 12, overflow: 'hidden',
+          border: '1px solid rgba(255,106,0,0.25)', position: 'relative',
+        }}>
           <img
             src="/assets/images/04.jpg"
             alt="Lojas Mel"
             onError={() => setErr04(true)}
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.65) saturate(0.8)' }}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.6) saturate(0.75)' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)' }} />
-          <p style={{ position: 'absolute', bottom: 5, left: 8, color: '#FF6A00', fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)' }} />
+          <p style={{ position: 'absolute', bottom: 7, left: 10, color: '#FF6A00', fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             Lojas Mel
           </p>
         </div>
       )}
-      {/* 05.jpg — Casas Bahia */}
       {!err05 && (
-        <div className="flex-1 rounded-xl overflow-hidden"
-          style={{ height: 80, border: '1px solid rgba(255,106,0,0.15)', position: 'relative' }}>
+        <div style={{
+          flex: 1, height: 88, borderRadius: 12, overflow: 'hidden',
+          border: '1px solid rgba(174,174,178,0.2)', position: 'relative',
+        }}>
           <img
             src="/assets/images/05.jpg"
             alt="Casas Bahia"
             onError={() => setErr05(true)}
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.65) saturate(0.8)' }}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.6) saturate(0.75)' }}
           />
-          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)' }} />
-          <p style={{ position: 'absolute', bottom: 5, left: 8, color: '#AEAEB2', fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%)' }} />
+          <p style={{ position: 'absolute', bottom: 7, left: 10, color: '#AEAEB2', fontSize: 9, fontWeight: 800, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
             Casas Bahia
           </p>
         </div>
@@ -80,94 +92,117 @@ export default function S07Convite() {
 
       <div className="absolute top-0 left-0 right-0 h-0.5 orange-line" />
       <div className="absolute inset-0 pointer-events-none" style={{
-        background: 'radial-gradient(ellipse 65% 50% at 50% 50%, rgba(255,106,0,0.05) 0%, transparent 70%)',
+        background: 'radial-gradient(ellipse 70% 55% at 50% 45%, rgba(255,106,0,0.04) 0%, transparent 70%)',
       }} />
 
-      <div className="mb-3 animate-fade-up">
-        <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">08 / Visão Global & Parceria</p>
-        <h2 className="slide-title text-white">O Futuro da Mobilidade</h2>
-        <p className="text-[#8E8E93] text-xs mt-0.5">Parceria Estratégica de Crescimento — Trade Finance & B2B</p>
+      {/* Cabeçalho */}
+      <div className="mb-4 animate-fade-up">
+        <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">08 / Expansão Global & Convite</p>
+        <h2 className="slide-title text-white">Validação Global & Parcerias Estratégicas</h2>
+        <p className="text-[#8E8E93] text-xs mt-1">
+          O TM GROUP já foi convidado para operar em três frentes de alto impacto.
+        </p>
       </div>
 
       <div className="slide-row flex-1 min-h-0">
 
-        {/* Tese em grid */}
-        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2.5 content-start animate-fade-in delay-200">
-          {tese.map((p, i) => (
-            <div key={i} className="p-3 sm:p-4 rounded-2xl card-premium flex gap-3">
-              <div className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                style={{ background: 'rgba(255,106,0,0.12)', border: '1px solid rgba(255,106,0,0.4)' }}>
-                <span style={{ color: '#FF6A00', fontSize: 9, fontWeight: 900 }}>{p.n}</span>
+        {/* Coluna principal — blocos de expansão */}
+        <div className="flex-1 flex flex-col gap-3 min-h-0 animate-fade-in delay-200">
+          {expansao.map(({ Icon, titulo, tag, color, topicos }, i) => (
+            <div key={i} className="flex-1 p-4 rounded-2xl"
+              style={{
+                background: i === 0 ? 'rgba(255,106,0,0.05)' : '#0D0D0D',
+                border: `1px solid ${i === 0 ? 'rgba(255,106,0,0.35)' : '#1A1A1A'}`,
+              }}>
+              {/* Header do bloco */}
+              <div className="flex items-center gap-3 mb-2.5">
+                <div style={{
+                  width: 32, height: 32, borderRadius: 8, flexShrink: 0,
+                  background: `${color}18`,
+                  border: `1px solid ${color}44`,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <Icon size={15} color={color} strokeWidth={1.8} />
+                </div>
+                <div>
+                  <p className="text-white font-bold text-sm leading-tight">{titulo}</p>
+                  <span style={{
+                    fontSize: 9, fontWeight: 700, letterSpacing: '0.12em',
+                    textTransform: 'uppercase', color,
+                  }}>
+                    {tag}
+                  </span>
+                </div>
               </div>
-              <div>
-                <p className="text-white font-bold text-xs mb-1">{p.titulo}</p>
-                <p className="text-[#8E8E93] text-[10px] leading-relaxed">{p.detalhe}</p>
+              {/* Tópicos */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+                {topicos.map((t, j) => (
+                  <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 8 }}>
+                    <div style={{
+                      width: 5, height: 5, borderRadius: '50%', flexShrink: 0,
+                      marginTop: 4, background: color, opacity: 0.8,
+                    }} />
+                    <p style={{ color: '#AEAEB2', fontSize: 11, lineHeight: 1.5 }}>{t}</p>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
-
-          {/* Redes parceiras */}
-          <div className="col-span-1 sm:col-span-2 p-3 rounded-xl"
-            style={{ background: '#121212', border: '1px solid #222' }}>
-            <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Ecossistema de Parcerias</p>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-              {redes.map((r, i) => (
-                <div key={i} className="p-2 rounded-lg text-center"
-                  style={{ background: '#0A0A0A', border: `1px solid ${r.color}22` }}>
-                  <p className="text-xs font-bold leading-tight" style={{ color: r.color }}>{r.nome}</p>
-                  <p className="text-[9px] text-[#8E8E93] mt-0.5">{r.status}</p>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
-        {/* Sidebar fechamento */}
+        {/* Sidebar direita — imagens + fechamento */}
         <div className="slide-sidebar flex flex-col gap-3 animate-slide-right delay-300">
 
           <FotosParceria />
 
-          {/* KPIs */}
-          <div className="grid grid-cols-2 gap-2">
-            <div className="p-3 rounded-xl text-center" style={{ background: '#121212', border: '1px solid #222' }}>
-              <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest">OPEX</p>
-              <p className="text-lg font-black text-white leading-none">R$ 55k</p>
-              <p className="text-[9px] text-[#8E8E93]">/mês</p>
-            </div>
-            <div className="p-3 rounded-xl text-center glow-orange"
-              style={{ background: 'rgba(255,106,0,0.08)', border: '1px solid rgba(255,106,0,0.45)' }}>
-              <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest">Meta</p>
-              <p className="text-lg font-black text-white leading-none">20</p>
-              <p className="text-[9px] text-[#8E8E93]">containers/ano</p>
-            </div>
-          </div>
-
-          {/* Tese de fechamento */}
-          <div className="flex-1 p-4 rounded-2xl glow-orange"
-            style={{ background: 'rgba(255,106,0,0.06)', border: '1px solid rgba(255,106,0,0.35)' }}>
-            <p className="text-[#FF6A00] text-[9px] font-bold uppercase tracking-widest mb-2">Tese de Fechamento</p>
-            <p className="text-white font-semibold text-xs leading-relaxed mb-3">
-              O TM GROUP provou execução. O capital institucional não é suporte — é a alavanca para dominar o mercado local e expandir globalmente.
+          {/* Fechamento institucional */}
+          <div className="flex-1 p-4 rounded-2xl"
+            style={{ background: 'rgba(255,106,0,0.06)', border: '1px solid rgba(255,106,0,0.4)' }}>
+            <p className="text-[#FF6A00] text-[9px] font-bold uppercase tracking-widest mb-3">
+              Convite Estratégico
             </p>
-            <div className="space-y-2">
+            <p className="text-white font-semibold text-sm leading-relaxed mb-4">
+              O TM GROUP provou execução. O capital institucional é a alavanca para dominar o mercado nacional e expandir globalmente.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 16 }}>
               {[
-                'Neutralizar 3 meses de lead time',
-                'Disparar múltiplos lotes em paralelo',
-                'Frotas B2B: Lojas Mel + Casas Bahia',
-                'Zanzibar, Pemba e Codemar — validação global',
+                { label: 'Mercado validado', desc: 'Produto, operação e demanda comprovados' },
+                { label: 'Estrutura pronta', desc: 'Time, sistemas e canais de venda ativos' },
+                { label: 'Escala imediata', desc: 'Capital acelera o que já funciona' },
               ].map((item, i) => (
-                <div key={i} className="flex items-start gap-2">
-                  <div className="w-1 h-1 rounded-full flex-shrink-0 mt-1.5" style={{ background: '#FF6A00' }} />
-                  <p className="text-[#AEAEB2] text-[10px] leading-snug">{item}</p>
+                <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <div style={{
+                    width: 20, height: 20, borderRadius: '50%', flexShrink: 0,
+                    background: 'rgba(255,106,0,0.15)', border: '1px solid rgba(255,106,0,0.4)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}>
+                    <span style={{ color: '#FF6A00', fontSize: 8, fontWeight: 900 }}>✓</span>
+                  </div>
+                  <div>
+                    <p style={{ color: '#FFFFFF', fontSize: 11, fontWeight: 700 }}>{item.label}</p>
+                    <p style={{ color: '#8E8E93', fontSize: 10, lineHeight: 1.4 }}>{item.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
-          </div>
 
-          <a href="mailto:teclemotos@teclemotos.com" className="btn-primary justify-center text-center text-xs">
-            <Mail size={13} />
-            Solicitar Reunião Executiva
-          </a>
+            <blockquote style={{
+              borderLeft: '2px solid #FF6A00',
+              paddingLeft: 12,
+              marginBottom: 16,
+            }}>
+              <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 11, fontStyle: 'italic', lineHeight: 1.6 }}>
+                "O crescimento já começou. O capital apenas acelera."
+              </p>
+            </blockquote>
+
+            <a href="mailto:teclemotos@teclemotos.com" className="btn-primary"
+              style={{ width: '100%', justifyContent: 'center', fontSize: 12 }}>
+              <Mail size={13} />
+              Solicitar Reunião Executiva
+            </a>
+          </div>
         </div>
       </div>
     </div>
