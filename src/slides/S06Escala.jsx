@@ -1,7 +1,24 @@
 import { useState, useMemo } from 'react'
 
+/* ── Constantes operacionais ───────────────────────────────────── */
 const OPEX_MENSAL = 55000
 
+/* ── Lucro Presumido — regime tributário do grupo ─────────────── */
+// Comércio: presunção de lucro = 8% da receita bruta
+// IRPJ 15% + CSLL 9% sobre a base + PIS 0,65% + COFINS 3% sobre receita
+const LP_RATE = (0.08 * (0.15 + 0.09)) + 0.0065 + 0.03  // ≈ 5,57%
+
+/* ── Tributos na importação de motos elétricas da China ───────── */
+// NCM 8711.60.00 — Veículos elétricos (benefícios fiscais ativos)
+const IMPORT_TAXES = [
+  { label: 'II — Imposto de Importação', rate: '0%',    note: 'Isento para veículos elétricos' },
+  { label: 'IPI',                         rate: '0%',    note: 'Isento para veículos elétricos' },
+  { label: 'ICMS',                        rate: '12%',   note: 'Sobre valor CIF' },
+  { label: 'PIS + COFINS Imp.',           rate: '11,75%',note: 'PIS 2,1% + COFINS 9,65%' },
+  { label: 'Frete + Despacho',            rate: '~8%',   note: 'Fretes e despachante aduaneiro' },
+]
+
+/* ── Tipos de container ────────────────────────────────────────── */
 const LOTES = {
   A: { label: 'Lote A', desc: 'Scooters Menores', vol: 240, custo: 550000,  lucro: 300000, color: '#FF6A00' },
   B: { label: 'Lote B', desc: 'Scooters Maiores', vol: 197, custo: 887000,  lucro: 400000, color: '#FF8C33' },
@@ -10,6 +27,8 @@ const LOTES = {
 
 const fmtBRL = (n) =>
   new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 }).format(n)
+
+const fmtPct = (n) => `${(n * 100).toFixed(1)}%`
 
 const historico = [
   { label: 'Dez/2024', desc: '1 container — início orgânico',               destaque: false },
@@ -20,29 +39,27 @@ const historico = [
 
 export default function S06Escala() {
   const [tipoLote, setTipoLote] = useState('A')
-  const [aporte, setAporte] = useState(1650000)
+  const [aporte,   setAporte]   = useState(1650000)
 
   const calc = useMemo(() => {
     const lote = LOTES[tipoLote]
-    const qtdContainers  = Math.floor(aporte / lote.custo)
-    const lucroLotes     = qtdContainers * lote.lucro        // lucro gerado pelos lotes
-    const opexCiclo      = OPEX_MENSAL * 3                   // custo fixo do ciclo de 3 meses
-    const lucroLiquido   = lucroLotes - opexCiclo            // pode ser negativo se poucos lotes
-    const roi            = qtdContainers > 0
-      ? ((lucroLiquido / aporte) * 100).toFixed(1)
-      : '—'
-    return {
-      lote,
-      qtdContainers,
-      lucroLotes,
-      opexCiclo,
-      lucroLiquido,
-      roi,
-      unidades: qtdContainers * lote.vol,
-    }
+    const qtd = Math.floor(aporte / lote.custo)
+
+    if (qtd === 0) return { lote, qtd: 0, receita: 0, custoProduto: 0, lucroOperacional: 0, impostosLP: 0, opexCiclo: 0, lucroLiquido: 0, roi: null, unidades: 0, margem: 0 }
+
+    const receita          = qtd * (lote.custo + lote.lucro)   // custo + markup = receita total
+    const custoProduto     = qtd * lote.custo                  // custo de aquisição + nacionalização
+    const lucroOperacional = receita - custoProduto            // = lucro bruto dos lotes
+    const impostosLP       = receita * LP_RATE                 // Lucro Presumido ~5,57% sobre receita
+    const opexCiclo        = OPEX_MENSAL * 3                   // R$ 55k × 3 meses
+    const lucroLiquido     = lucroOperacional - impostosLP - opexCiclo
+    const roi              = lucroLiquido / aporte
+    const margem           = lucroLiquido / receita
+
+    return { lote, qtd, receita, custoProduto, lucroOperacional, impostosLP, opexCiclo, lucroLiquido, roi, unidades: qtd * lote.vol, margem }
   }, [tipoLote, aporte])
 
-  const lucroPositivo = calc.lucroLiquido > 0
+  const positivo = calc.lucroLiquido > 0
 
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden slide-pad"
@@ -54,60 +71,74 @@ export default function S06Escala() {
       }} />
 
       {/* Cabeçalho */}
-      <div className="mb-3 animate-fade-up">
+      <div className="mb-3 animate-fade-up" style={{ flexShrink: 0 }}>
         <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">06 / Modelagem Financeira</p>
-        <h2 className="slide-title text-white">Simulador de Aporte por Container</h2>
-        <p className="text-[#8E8E93] text-xs mt-0.5">Calcule quantos containers seu capital libera e o retorno estimado no ciclo de 3 meses.</p>
+        <h2 className="slide-title text-white">Simulador de Retorno por Container</h2>
+        <p className="text-[#8E8E93] text-xs mt-0.5">
+          Regime Lucro Presumido · Importação de veículos elétricos (NCM 8711.60.00) · China → Brasil
+        </p>
       </div>
 
       <div className="slide-row flex-1 min-h-0">
 
-        {/* ── Sidebar esquerda — contexto operacional ── */}
-        <div className="slide-sidebar flex flex-col gap-2.5 animate-slide-left delay-200">
+        {/* ── Sidebar — informações fiscais e tração ── */}
+        <div className="slide-sidebar flex flex-col gap-2 animate-slide-left delay-200" style={{ minHeight: 0 }}>
 
-          {/* OPEX */}
-          <div className="p-3 rounded-xl text-center glow-orange"
-            style={{ background: 'rgba(255,106,0,0.08)', border: '1px solid rgba(255,106,0,0.5)' }}>
-            <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold">OPEX Mensal Fixo</p>
-            <p className="font-black text-white text-xl leading-none mt-1">R$ 55.000</p>
-            <p className="text-[#8E8E93] text-[9px] mt-0.5">Custo fixo independente do volume</p>
-          </div>
-
-          {/* Ciclo */}
-          <div className="p-3 rounded-xl" style={{ background: '#121212', border: '1px solid #222' }}>
-            <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Ciclo de Giro</p>
-            <div className="space-y-1.5">
-              {[
-                { fase: 'Pedido na China',  cor: '#FF6A00' },
-                { fase: 'Produção + Frete', cor: '#FF8C33' },
-                { fase: 'Desembaraço',      cor: '#AEAEB2' },
-                { fase: 'Venda do Estoque', cor: '#8E8E93' },
-              ].map((f, i) => (
-                <div key={i} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: f.cor }} />
-                  <span className="text-[10px]" style={{ color: f.cor }}>{f.fase}</span>
+          {/* Tributação importação */}
+          <div className="p-3 rounded-xl" style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', flexShrink: 0 }}>
+            <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold mb-2">
+              Tributos na Importação — China
+            </p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+              {IMPORT_TAXES.map((t, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <span style={{ color: '#8E8E93', fontSize: 9 }}>{t.label}</span>
+                  <div style={{ textAlign: 'right' }}>
+                    <span style={{
+                      color: t.rate === '0%' ? '#22C55E' : '#AEAEB2',
+                      fontSize: 9, fontWeight: 800,
+                    }}>{t.rate}</span>
+                    <span style={{ color: '#3A3A3C', fontSize: 8, display: 'block' }}>{t.note}</span>
+                  </div>
                 </div>
               ))}
             </div>
-            <div className="mt-2 pt-2 border-t border-[#1C1C1E] flex items-center justify-between">
-              <span className="text-[9px] text-[#8E8E93]">Duração total</span>
-              <span className="text-[#FF6A00] font-black text-xs">≈ 3 meses</span>
+          </div>
+
+          {/* Lucro Presumido */}
+          <div className="p-3 rounded-xl" style={{ background: 'rgba(255,106,0,0.05)', border: '1px solid rgba(255,106,0,0.2)', flexShrink: 0 }}>
+            <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold mb-1.5">Regime — Lucro Presumido</p>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+              {[
+                { t: 'Presunção (comércio)',   v: '8% receita' },
+                { t: 'IRPJ 15% + CSLL 9%',   v: '1,92% receita' },
+                { t: 'PIS + COFINS',          v: '3,65% receita' },
+              ].map((r, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#8E8E93', fontSize: 9 }}>{r.t}</span>
+                  <span style={{ color: '#AEAEB2', fontSize: 9, fontWeight: 700 }}>{r.v}</span>
+                </div>
+              ))}
+              <div style={{ borderTop: '1px solid rgba(255,106,0,0.2)', marginTop: 4, paddingTop: 4, display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ color: '#FF6A00', fontSize: 9, fontWeight: 700 }}>Total sobre receita</span>
+                <span style={{ color: '#FF6A00', fontSize: 9, fontWeight: 900 }}>≈ 5,57%</span>
+              </div>
             </div>
           </div>
 
           {/* Tração real */}
-          <div className="flex-1 p-3 rounded-xl" style={{ background: '#121212', border: '1px solid #222' }}>
+          <div className="flex-1 p-3 rounded-xl" style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', minHeight: 0 }}>
             <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Tração Real</p>
-            <div className="space-y-2.5">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {historico.map((h, i) => (
-                <div key={i} className="flex gap-2">
-                  <div className="w-0.5 flex-shrink-0 rounded-full"
-                    style={{ background: h.destaque ? '#FF6A00' : '#2C2C2E', minHeight: 30 }} />
+                <div key={i} style={{ display: 'flex', gap: 8 }}>
+                  <div style={{
+                    width: 2, flexShrink: 0, borderRadius: 2, minHeight: 28,
+                    background: h.destaque ? '#FF6A00' : '#2C2C2E',
+                  }} />
                   <div>
-                    <p className="text-[10px] font-bold" style={{ color: h.destaque ? '#FF6A00' : '#AEAEB2' }}>
-                      {h.label}
-                    </p>
-                    <p className="text-[#8E8E93] text-[9px] leading-snug">{h.desc}</p>
+                    <p style={{ fontSize: 10, fontWeight: 700, color: h.destaque ? '#FF6A00' : '#AEAEB2' }}>{h.label}</p>
+                    <p style={{ fontSize: 9, color: '#8E8E93', lineHeight: 1.4 }}>{h.desc}</p>
                   </div>
                 </div>
               ))}
@@ -116,141 +147,107 @@ export default function S06Escala() {
         </div>
 
         {/* ── Calculadora principal ── */}
-        <div className="flex-1 flex flex-col gap-3 animate-slide-right delay-300">
+        <div className="flex-1 flex flex-col gap-2.5 animate-slide-right delay-300" style={{ minHeight: 0 }}>
 
           {/* Inputs */}
-          <div className="p-4 rounded-2xl" style={{ background: '#0F0F0F', border: '1px solid #1C1C1E' }}>
+          <div className="p-3 rounded-xl" style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', flexShrink: 0 }}>
 
-            {/* Seletor de tipo de lote */}
-            <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">
-              1. Escolha o tipo de container
-            </p>
-            <div className="flex gap-2 mb-4">
+            {/* Seletor de lote */}
+            <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Tipo de Container</p>
+            <div style={{ display: 'flex', gap: 8, marginBottom: 12 }}>
               {Object.entries(LOTES).map(([key, l]) => (
-                <button
-                  key={key}
-                  onClick={() => setTipoLote(key)}
-                  className="flex-1 py-2.5 rounded-xl transition-all duration-200"
+                <button key={key} onClick={() => setTipoLote(key)}
                   style={{
+                    flex: 1, padding: '8px 4px', borderRadius: 10, cursor: 'pointer', border: 'none',
                     background: tipoLote === key ? 'rgba(255,106,0,0.12)' : '#0A0A0A',
-                    border: `1.5px solid ${tipoLote === key ? l.color : '#2C2C2E'}`,
-                    color: tipoLote === key ? l.color : '#8E8E93',
+                    outline: `1.5px solid ${tipoLote === key ? l.color : '#2C2C2E'}`,
+                    transition: 'all 0.2s',
                   }}>
-                  <div className="text-xs font-black">{l.label}</div>
-                  <div className="text-[9px] font-normal mt-0.5 opacity-70">{l.desc}</div>
-                  <div className="text-[9px] font-bold mt-0.5" style={{ color: tipoLote === key ? l.color : '#3A3A3C' }}>
-                    {fmtBRL(l.custo)} / lote
+                  <div style={{ fontSize: 11, fontWeight: 800, color: tipoLote === key ? l.color : '#8E8E93' }}>{l.label}</div>
+                  <div style={{ fontSize: 9, color: '#8E8E93', marginTop: 2 }}>{l.desc}</div>
+                  <div style={{ fontSize: 9, fontWeight: 700, marginTop: 2, color: tipoLote === key ? l.color : '#3A3A3C' }}>
+                    {fmtBRL(l.custo)}/ct
                   </div>
                 </button>
               ))}
             </div>
 
             {/* Slider */}
-            <p className="text-[9px] text-[#8E8E93] uppercase tracking-widest font-medium mb-1.5">
-              2. Defina o capital a aportar
-            </p>
-            <div className="flex justify-between items-baseline mb-1.5">
-              <span className="text-[10px] text-[#8E8E93]">Capital total</span>
-              <span className="font-black text-lg" style={{ color: '#FF6A00' }}>{fmtBRL(aporte)}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 6 }}>
+              <span style={{ color: '#8E8E93', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Capital aportado</span>
+              <span style={{ color: '#FF6A00', fontSize: 18, fontWeight: 900 }}>{fmtBRL(aporte)}</span>
             </div>
-            <input
-              type="range"
-              min={500000}
-              max={5000000}
-              step={50000}
-              value={aporte}
+            <input type="range" min={500000} max={5000000} step={50000} value={aporte}
               onChange={e => setAporte(Number(e.target.value))}
-              style={{ width: '100%', accentColor: '#FF6A00', cursor: 'pointer', height: 4 }}
-            />
-            <div className="flex justify-between text-[9px] text-[#3A3A3C] mt-1">
-              <span>R$ 500 mil</span>
-              <span>R$ 5 milhões</span>
+              style={{ width: '100%', accentColor: '#FF6A00', cursor: 'pointer', height: 4 }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 8, color: '#3A3A3C', marginTop: 4 }}>
+              <span>R$ 500k</span><span>R$ 5M</span>
             </div>
           </div>
 
-          {/* Resultado */}
-          <div className="flex-1 p-4 rounded-2xl"
-            style={{ background: 'rgba(255,106,0,0.05)', border: `1px solid ${lucroPositivo ? 'rgba(255,106,0,0.45)' : '#2C2C2E'}` }}>
-
-            <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold mb-3">
-              Resultado — Ciclo de 3 Meses
-            </p>
+          {/* DRE simplificado — Demonstrativo de Resultados */}
+          <div className="flex-1 rounded-xl overflow-hidden"
+            style={{ border: `1px solid ${positivo ? 'rgba(255,106,0,0.4)' : '#1A1A1A'}`, background: 'rgba(255,106,0,0.04)', minHeight: 0 }}>
 
             {/* KPI principal */}
-            <div className="p-3 rounded-xl text-center mb-3"
-              style={{ background: 'rgba(255,106,0,0.1)', border: '1px solid rgba(255,106,0,0.4)' }}>
-              <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest">Containers Liberados Simultaneamente</p>
-              <p className="font-black text-white leading-none my-1" style={{ fontSize: 'clamp(2.2rem, 5vw, 3.5rem)' }}>
-                {calc.qtdContainers}
-              </p>
-              <p className="text-[#8E8E93] text-[10px]">
-                {calc.unidades.toLocaleString('pt-BR')} unidades em estoque
-              </p>
-            </div>
-
-            {/* Equação financeira clara */}
-            <div className="rounded-xl overflow-hidden" style={{ border: '1px solid #1C1C1E' }}>
-              <div className="flex items-center justify-between px-3 py-2" style={{ background: '#0A0A0A' }}>
-                <span className="text-[10px] text-[#8E8E93]">Lucro gerado pelos lotes</span>
-                <span className="text-white font-bold text-xs">{fmtBRL(calc.lucroLotes)}</span>
+            <div style={{ background: 'rgba(255,106,0,0.1)', padding: '10px 14px', borderBottom: '1px solid rgba(255,106,0,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div>
+                <p style={{ color: '#FF6A00', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.1em' }}>Containers Liberados</p>
+                <p style={{ color: '#FFFFFF', fontSize: 36, fontWeight: 900, lineHeight: 1 }}>{calc.qtd}</p>
+                <p style={{ color: '#8E8E93', fontSize: 9, marginTop: 2 }}>{calc.unidades.toLocaleString('pt-BR')} unidades</p>
               </div>
-              <div className="flex items-center justify-between px-3 py-2" style={{ background: '#080808', borderTop: '1px solid #1C1C1E' }}>
-                <span className="text-[10px] text-[#8E8E93]">
-                  Custo operacional do ciclo <span style={{ color: '#3A3A3C' }}>(R$ 55k × 3 meses)</span>
-                </span>
-                <span className="text-[#AEAEB2] font-bold text-xs">− {fmtBRL(calc.opexCiclo)}</span>
-              </div>
-              <div className="flex items-center justify-between px-3 py-2.5"
-                style={{
-                  background: lucroPositivo ? 'rgba(255,106,0,0.1)' : 'rgba(60,60,60,0.3)',
-                  borderTop: `1px solid ${lucroPositivo ? 'rgba(255,106,0,0.35)' : '#2C2C2E'}`,
-                }}>
-                <span className="text-[10px] font-bold" style={{ color: lucroPositivo ? '#FF6A00' : '#8E8E93' }}>
-                  = Lucro Líquido do Ciclo
-                </span>
-                <span className="font-black text-sm" style={{ color: lucroPositivo ? '#FF6A00' : '#8E8E93' }}>
-                  {fmtBRL(calc.lucroLiquido)}
-                </span>
+              <div style={{ textAlign: 'right' }}>
+                <p style={{ color: '#8E8E93', fontSize: 9, textTransform: 'uppercase', letterSpacing: '0.1em' }}>ROI do Ciclo</p>
+                <p style={{ fontSize: 28, fontWeight: 900, lineHeight: 1, color: positivo ? '#FF6A00' : '#8E8E93' }}>
+                  {calc.roi !== null ? fmtPct(calc.roi) : '—'}
+                </p>
+                <p style={{ color: '#8E8E93', fontSize: 9, marginTop: 2 }}>em ≈ 3 meses</p>
               </div>
             </div>
 
-            {/* ROI */}
-            <div className="flex gap-2 mt-2.5">
-              <div className="flex-1 p-2.5 rounded-xl text-center"
-                style={{ background: lucroPositivo ? 'rgba(255,106,0,0.12)' : '#121212', border: `1px solid ${lucroPositivo ? 'rgba(255,106,0,0.4)' : '#222'}` }}>
-                <p className="text-[8px] text-[#8E8E93] uppercase tracking-widest">ROI no Ciclo</p>
-                <p className="font-black text-sm mt-0.5" style={{ color: lucroPositivo ? '#FF6A00' : '#8E8E93' }}>
-                  {calc.roi}{calc.qtdContainers > 0 ? '%' : ''}
-                </p>
-              </div>
-              <div className="flex-1 p-2.5 rounded-xl text-center" style={{ background: '#121212', border: '1px solid #222' }}>
-                <p className="text-[8px] text-[#8E8E93] uppercase tracking-widest">Custo por Unidade</p>
-                <p className="font-black text-sm mt-0.5 text-white">
-                  {calc.qtdContainers > 0
-                    ? fmtBRL(Math.round(calc.lote.custo / calc.lote.vol))
-                    : '—'}
-                </p>
-              </div>
-              <div className="flex-1 p-2.5 rounded-xl text-center" style={{ background: '#121212', border: '1px solid #222' }}>
-                <p className="text-[8px] text-[#8E8E93] uppercase tracking-widest">Margem/Unidade</p>
-                <p className="font-black text-sm mt-0.5 text-white">
-                  {calc.qtdContainers > 0
-                    ? fmtBRL(Math.round(calc.lote.lucro / calc.lote.vol))
-                    : '—'}
-                </p>
-              </div>
-            </div>
+            {/* DRE — linha por linha */}
+            <div style={{ padding: '8px 14px', display: 'flex', flexDirection: 'column', gap: 4 }}>
 
-            {!lucroPositivo && calc.qtdContainers > 0 && (
-              <p className="text-[9px] text-[#AEAEB2] mt-2 leading-relaxed">
-                ⚠ Com {calc.qtdContainers} container{calc.qtdContainers > 1 ? 's' : ''}, o lucro dos lotes não cobre o OPEX do ciclo. Aumente o capital ou selecione um lote de maior volume.
-              </p>
-            )}
-            {calc.qtdContainers === 0 && (
-              <p className="text-[9px] text-[#AEAEB2] mt-2">
-                ⚠ Capital insuficiente para adquirir 1 container deste tipo.
-              </p>
-            )}
+              {[
+                { label: '(+) Receita Bruta de Vendas',                   value: calc.receita,           cor: '#FFFFFF',  bold: false },
+                { label: '(−) Custo de Aquisição + Nacionalização',       value: -calc.custoProduto,     cor: '#AEAEB2',  bold: false },
+                { label: '(=) Lucro Bruto Operacional',                   value: calc.lucroOperacional,  cor: '#FFFFFF',  bold: true, sep: true },
+                { label: `(−) Impostos Lucro Presumido (~5,57% receita)`, value: -calc.impostosLP,       cor: '#AEAEB2',  bold: false },
+                { label: '(−) OPEX do Ciclo (R$ 55k × 3 meses)',         value: -calc.opexCiclo,        cor: '#AEAEB2',  bold: false },
+                { label: '(=) Lucro Líquido Real',                        value: calc.lucroLiquido,      cor: positivo ? '#FF6A00' : '#8E8E93', bold: true, sep: true },
+              ].map((row, i) => (
+                <div key={i}>
+                  {row.sep && <div style={{ height: 1, background: 'rgba(255,106,0,0.15)', margin: '3px 0' }} />}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <span style={{ fontSize: 9.5, color: row.cor, fontWeight: row.bold ? 700 : 400 }}>{row.label}</span>
+                    <span style={{ fontSize: row.bold ? 12 : 10, color: row.cor, fontWeight: row.bold ? 900 : 500, fontVariantNumeric: 'tabular-nums' }}>
+                      {calc.qtd > 0 ? fmtBRL(row.value) : '—'}
+                    </span>
+                  </div>
+                </div>
+              ))}
+
+              {/* Margem líquida */}
+              {calc.qtd > 0 && (
+                <div style={{ marginTop: 6, padding: '6px 10px', borderRadius: 8, background: positivo ? 'rgba(255,106,0,0.1)' : '#121212', border: `1px solid ${positivo ? 'rgba(255,106,0,0.3)' : '#222'}`, display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ fontSize: 9, color: '#8E8E93' }}>Margem líquida s/ receita</span>
+                  <span style={{ fontSize: 11, fontWeight: 900, color: positivo ? '#FF6A00' : '#8E8E93' }}>
+                    {fmtPct(calc.margem < 0 ? 0 : calc.margem)}
+                  </span>
+                </div>
+              )}
+
+              {calc.qtd === 0 && (
+                <p style={{ color: '#AEAEB2', fontSize: 9, marginTop: 8 }}>
+                  ⚠ Capital insuficiente para adquirir 1 container deste tipo.
+                </p>
+              )}
+              {calc.qtd > 0 && !positivo && (
+                <p style={{ color: '#AEAEB2', fontSize: 9, marginTop: 4 }}>
+                  ⚠ Lucro dos lotes não cobre tributos + OPEX. Aumente o capital ou o volume.
+                </p>
+              )}
+            </div>
           </div>
         </div>
       </div>
