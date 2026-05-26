@@ -105,6 +105,79 @@ export default function S05Estrutura() {
               ))}
             </div>
           </div>
+
+          {/* ── BANCO GALÁPAGOS — Perfil de Crédito ── */}
+          <div className="flex-1 rounded-2xl overflow-hidden glow-orange animate-fade-up delay-400"
+            style={{ background: 'rgba(255,106,0,0.06)', border: '1px solid rgba(255,106,0,0.5)', minHeight: 0 }}>
+
+            {/* Header com nome do banco */}
+            <div style={{
+              background: 'rgba(255,106,0,0.12)',
+              borderBottom: '1px solid rgba(255,106,0,0.3)',
+              padding: '8px 14px',
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            }}>
+              <div>
+                <p style={{ color: '#FF6A00', fontSize: 8, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
+                  Apresentado a
+                </p>
+                <p style={{ color: '#FFFFFF', fontSize: 13, fontWeight: 900, letterSpacing: '0.04em' }}>
+                  BANCO GALÁPAGOS
+                </p>
+              </div>
+              <div style={{
+                width: 36, height: 36, borderRadius: '50%',
+                background: 'rgba(255,106,0,0.15)',
+                border: '1.5px solid rgba(255,106,0,0.6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 16,
+              }}>
+                🏦
+              </div>
+            </div>
+
+            {/* Perfil de crédito */}
+            <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 7 }}>
+              <p style={{ color: '#AEAEB2', fontSize: 9, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 2 }}>
+                Perfil de Crédito & Garantias
+              </p>
+
+              {[
+                { icon: '✓', label: 'Operação auto-liquidável',        desc: 'Ciclo de 3 meses — China → venda. Capital retorna naturalmente.' },
+                { icon: '✓', label: 'Garantia real em estoque físico', desc: 'Cada container é um ativo tangível. Veículos como colateral.' },
+                { icon: '✓', label: 'Demanda validada no mercado',     desc: 'Estoque se esgota antes do próximo container chegar.' },
+                { icon: '✓', label: 'Zero inadimplência no atacado',   desc: '100% de recebimento nas operações B2B validadas.' },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <div style={{
+                    width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
+                    background: 'rgba(255,106,0,0.18)',
+                    border: '1px solid rgba(255,106,0,0.5)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 9, color: '#FF6A00', fontWeight: 900,
+                  }}>
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p style={{ color: '#FFFFFF', fontSize: 10, fontWeight: 700, lineHeight: 1.2 }}>{item.label}</p>
+                    <p style={{ color: '#8E8E93', fontSize: 9, lineHeight: 1.4, marginTop: 1 }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+
+              {/* Frase de fechamento */}
+              <div style={{
+                marginTop: 4, padding: '7px 10px', borderRadius: 8,
+                background: 'rgba(255,106,0,0.08)',
+                border: '1px solid rgba(255,106,0,0.3)',
+                borderLeft: '3px solid #FF6A00',
+              }}>
+                <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 10, fontStyle: 'italic', lineHeight: 1.5 }}>
+                  "Capital de giro lastreado em ativos reais, com retorno em 3 meses e demanda de mercado comprovada."
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Coluna direita — TM TECH */}
