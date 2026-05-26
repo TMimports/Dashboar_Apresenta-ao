@@ -162,21 +162,27 @@ export default function SplashScreen({ onDone }) {
         transition: 'opacity 1s ease',
       }} />
 
-      {/* ══ FASE 1 — RAIOS ══════════════════════════════════════ */}
+      {/* ══ FASE 1 — 1 RAIO CENTRAL ══════════════════════════════ */}
       {phase === 1 && (
-        <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-          <LightningBolt x="8%" y="5%" rotate={-15} opacity={1} scale={1.8} />
-          <LightningBolt x="25%" y="20%" rotate={10} opacity={0.8} scale={1.2} />
-          <LightningBolt x="60%" y="8%" rotate={-8} opacity={1} scale={2.2} />
-          <LightningBolt x="75%" y="30%" rotate={20} opacity={0.9} scale={1.5} />
-          <LightningBolt x="45%" y="2%" rotate={0} opacity={1} scale={2.8} />
-          <LightningBolt x="85%" y="10%" rotate={-25} opacity={0.7} scale={1.3} />
-          {/* Flash branco de impacto */}
+        <div style={{
+          position: 'absolute', inset: 0, pointerEvents: 'none',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
           <div style={{
-            position: 'absolute', inset: 0,
-            background: 'rgba(255,107,0,0.08)',
             animation: 'flash-impact 1.2s ease-out both',
-          }} />
+            filter: 'drop-shadow(0 0 40px rgba(255,107,0,1)) drop-shadow(0 0 80px rgba(255,140,0,0.6))',
+          }}>
+            <svg width="90" height="180" viewBox="0 0 60 120" fill="none">
+              <path
+                d="M36 2 L8 62 L28 62 L18 118 L56 46 L34 46 Z"
+                fill="#FF6B00"
+              />
+              <path
+                d="M36 2 L8 62 L28 62 L18 118 L56 46 L34 46 Z"
+                fill="rgba(255,220,100,0.45)"
+              />
+            </svg>
+          </div>
         </div>
       )}
 
