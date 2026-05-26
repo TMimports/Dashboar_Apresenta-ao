@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual da Calculadora — TM GROUP</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      font-size: 13px;
+      line-height: 1.6;
+      padding: 0;
+    }
+
+    /* ── CAPA ── */
+    .capa {
+      background: #000;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      page-break-after: always;
+      padding: 60px 40px;
+    }
+    .capa-badge {
+      color: #FF6A00;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,106,0,0.4);
+      padding: 6px 18px;
+      border-radius: 999px;
+      margin-bottom: 40px;
+    }
+    .capa-titulo {
+      color: #fff;
+      font-size: 36px;
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .capa-titulo span { color: #FF6A00; }
+    .capa-sub {
+      color: #8E8E93;
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .capa-divider {
+      width: 80px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #FF6A00, transparent);
+      margin: 0 auto 48px;
+    }
+    .capa-info {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 600px;
+      width: 100%;
+    }
+    .capa-info-item {
+      text-align: center;
+      padding: 20px 16px;
+      border: 1px solid rgba(255,106,0,0.25);
+      border-radius: 12px;
+      background: rgba(255,106,0,0.06);
+    }
+    .capa-info-n { color: #FF6A00; font-size: 28px; font-weight: 900; }
+    .capa-info-l { color: #8E8E93; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+    .capa-rodape {
+      position: absolute;
+      bottom: 32px;
+      color: #3A3A3C;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* ── CONTEÚDO ── */
+    .pagina {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 48px;
+    }
+
+    .secao { margin-bottom: 40px; page-break-inside: avoid; }
+
+    .secao-titulo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .secao-num {
+      width: 28px; height: 28px;
+      background: #FF6A00;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 900;
+      flex-shrink: 0;
+    }
+    .secao-titulo h2 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #000;
+      letter-spacing: -0.01em;
+    }
+
+    /* Tabelas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+    thead tr { background: #FF6A00; }
+    thead th {
+      color: #fff;
+      font-weight: 700;
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+    }
+    tbody tr:nth-child(even) { background: #f9f9f9; }
+    tbody tr:hover { background: #fff7f2; }
+    tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      color: #222;
+    }
+    tbody td:first-child { font-weight: 600; }
+    .tag-zero {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 800;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+    .tag-rate {
+      background: #fff3e0;
+      color: #e65100;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    /* Cards highlight */
+    .highlight-card {
+      background: #fff8f0;
+      border: 1px solid rgba(255,106,0,0.3);
+      border-left: 4px solid #FF6A00;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+    .highlight-card p { color: #333; font-size: 12.5px; line-height: 1.6; }
+    .highlight-card strong { color: #FF6A00; }
+
+    /* DRE box */
+    .dre-box {
+      background: #000;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin: 16px 0;
+      font-family: 'Courier New', monospace;
+    }
+    .dre-linha {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .dre-linha:last-child { border-bottom: none; }
+    .dre-label { color: #AEAEB2; font-size: 12px; }
+    .dre-value { color: #fff; font-size: 12px; font-weight: 700; }
+    .dre-linha.total { background: rgba(255,106,0,0.1); margin: 6px -4px; padding: 8px 4px; border-radius: 6px; border-bottom: none; }
+    .dre-linha.total .dre-label { color: #FF6A00; font-weight: 700; }
+    .dre-linha.total .dre-value { color: #FF6A00; font-size: 14px; }
+    .dre-sinal { color: #8E8E93; margin-right: 8px; }
+
+    /* Checklist pontos */
+    .checklist { list-style: none; padding: 0; margin: 12px 0; }
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .checklist li:last-child { border-bottom: none; }
+    .check-icon {
+      width: 22px; height: 22px;
+      background: #FF6A00;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 11px; font-weight: 900;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .check-label { font-weight: 700; color: #111; font-size: 13px; }
+    .check-desc { color: #666; font-size: 12px; margin-top: 2px; }
+
+    /* Formula box */
+    .formula {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #333;
+      border-left: 3px solid #FF6A00;
+    }
+    .formula .result { color: #FF6A00; font-weight: 800; }
+
+    /* Alerta */
+    .alerta {
+      background: #fffbf0;
+      border: 1px solid #ffd54f;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 8px 0;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+    .alerta-icon { font-size: 16px; flex-shrink: 0; }
+    .alerta p { font-size: 12px; color: #555; line-height: 1.5; }
+    .alerta strong { color: #e65100; }
+
+    /* Rodapé pagina */
+    .rodape-pagina {
+      margin-top: 60px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #aaa;
+      font-size: 10px;
+    }
+    .rodape-pagina span { color: #FF6A00; font-weight: 700; }
+
+    /* Print */
+    @media print {
+      body { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      .capa { min-height: 100vh; page-break-after: always; }
+      .secao { page-break-inside: avoid; }
+      .pagina { padding: 40px 36px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════ CAPA ════════════════ -->
+<div class="capa" style="position:relative;">
+  <div class="capa-badge">TM GROUP — Documento Interno</div>
+  <h1 class="capa-titulo">Manual da <span>Calculadora</span><br>Financeira</h1>
+  <p class="capa-sub">Guia completo para o Apresentador — Impostos, Cálculos e Interpretação</p>
+  <div class="capa-divider"></div>
+  <div class="capa-info">
+    <div class="capa-info-item">
+      <div class="capa-info-n">5,57%</div>
+      <div class="capa-info-l">Carga LP<br>sobre receita</div>
+    </div>
+    <div class="capa-info-item">
+      <div class="capa-info-n">3 meses</div>
+      <div class="capa-info-l">Ciclo de<br>retorno</div>
+    </div>
+    <div class="capa-info-item">
+      <div class="capa-info-n">0%</div>
+      <div class="capa-info-l">II + IPI<br>elétricos</div>
+    </div>
+  </div>
+  <div class="capa-rodape">TM GROUP © 2026 — CONFIDENCIAL — USO INTERNO</div>
+</div>
+
+<!-- ════════════════ CONTEÚDO ════════════════ -->
+<div class="pagina">
+
+  <!-- 1. O QUE A CALCULADORA FAZ -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">1</div>
+      <h2>O que a Calculadora Simula</h2>
+    </div>
+    <p style="color:#444; margin-bottom:12px;">
+      A calculadora mostra o <strong>resultado financeiro real e completo</strong> de um ciclo de importação de motos elétricas da China para o Brasil,
+      considerando o capital investido, os impostos reais de importação, o regime tributário da empresa (Lucro Presumido) e o custo operacional fixo mensal (OPEX).
+    </p>
+    <div class="highlight-card">
+      <p>O objetivo é responder a pergunta do investidor: <strong>"Se eu aportar R$ X, qual será meu retorno líquido em 3 meses?"</strong> — com todos os custos reais descontados, sem estimativas otimistas.</p>
+    </div>
+  </div>
+
+  <!-- 2. TIPOS DE CONTAINER -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">2</div>
+      <h2>Tipos de Container (Lotes)</h2>
+    </div>
+    <p style="color:#444; margin-bottom:12px;">
+      O custo já inclui o produto na China + frete marítimo + todos os impostos de importação + desembaraço aduaneiro. O lucro é o resultado esperado após a venda do estoque.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Lote</th>
+          <th>Produto</th>
+          <th>Unidades</th>
+          <th>Custo Total (Aquisição + Nac.)</th>
+          <th>Lucro Bruto Gerado</th>
+          <th>Preço Médio/Un.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Lote A</td>
+          <td>Scooters Menores</td>
+          <td>240 unidades</td>
+          <td>R$ 550.000</td>
+          <td>R$ 300.000</td>
+          <td>~R$ 3.542/un.</td>
+        </tr>
+        <tr>
+          <td>Lote B</td>
+          <td>Scooters Maiores</td>
+          <td>197 unidades</td>
+          <td>R$ 887.000</td>
+          <td>R$ 400.000</td>
+          <td>~R$ 6.533/un.</td>
+        </tr>
+        <tr>
+          <td>Lote C</td>
+          <td>Modelos Médios</td>
+          <td>105 unidades</td>
+          <td>R$ 550.000</td>
+          <td>R$ 300.000</td>
+          <td>~R$ 8.095/un.</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="alerta">
+      <div class="alerta-icon">💡</div>
+      <p><strong>Para o apresentador:</strong> O custo de R$ 550k ou R$ 887k já é o valor TOTAL para trazer o container até o Brasil, pronto para venda. O lucro é o que a operação comercial gera após vender todas as unidades.</p>
+    </div>
+  </div>
+
+  <!-- 3. IMPOSTOS DE IMPORTAÇÃO -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">3</div>
+      <h2>Impostos na Importação — China → Brasil</h2>
+    </div>
+    <p style="color:#444; margin-bottom:12px;">
+      Os veículos elétricos importados da China se enquadram no <strong>NCM 8711.60.00</strong> (motociclos com motor elétrico). Este código goza de benefícios fiscais específicos por política governamental de incentivo à mobilidade elétrica.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Tributo</th>
+          <th>Taxa</th>
+          <th>Base de Cálculo</th>
+          <th>Observação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>II — Imposto de Importação</td>
+          <td><span class="tag-zero">0%</span></td>
+          <td>Valor CIF</td>
+          <td>Isento para veículos elétricos (Res. Gecex 284/2021)</td>
+        </tr>
+        <tr>
+          <td>IPI — Imposto sobre Produtos Industrializados</td>
+          <td><span class="tag-zero">0%</span></td>
+          <td>Valor CIF + II</td>
+          <td>Isenção para motocicletas elétricas</td>
+        </tr>
+        <tr>
+          <td>ICMS — Imposto Estadual</td>
+          <td><span class="tag-rate">12%</span></td>
+          <td>Valor CIF + II + IPI + despesas</td>
+          <td>Varia por estado. Base: Rio de Janeiro (12%)</td>
+        </tr>
+        <tr>
+          <td>PIS — Importação</td>
+          <td><span class="tag-rate">2,10%</span></td>
+          <td>Valor CIF</td>
+          <td>PIS sobre importação — alíquota especial</td>
+        </tr>
+        <tr>
+          <td>COFINS — Importação</td>
+          <td><span class="tag-rate">9,65%</span></td>
+          <td>Valor CIF</td>
+          <td>COFINS sobre importação — alíquota especial</td>
+        </tr>
+        <tr>
+          <td>Frete Marítimo</td>
+          <td><span class="tag-rate">~5–8%</span></td>
+          <td>Valor FOB</td>
+          <td>Depende do volume, rota e modal. Média estimada.</td>
+        </tr>
+        <tr>
+          <td>Despachante Aduaneiro + Siscomex</td>
+          <td><span class="tag-rate">~2–3%</span></td>
+          <td>Valor CIF</td>
+          <td>Honorários + taxas de sistema aduaneiro federal</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="highlight-card">
+      <p>✅ <strong>Grande vantagem competitiva:</strong> O II e o IPI zerados são um benefício exclusivo de veículos elétricos. Concorrentes que vendem motos a combustão pagam II de 35% e IPI de até 25%. Isso reduz significativamente o custo de importação da TM GROUP frente ao mercado tradicional.</p>
+    </div>
+  </div>
+
+  <!-- 4. LUCRO PRESUMIDO -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">4</div>
+      <h2>Regime Tributário — Lucro Presumido</h2>
+    </div>
+    <p style="color:#444; margin-bottom:12px;">
+      O <strong>Lucro Presumido</strong> é um regime tributário simplificado para empresas com faturamento anual de até R$ 78 milhões.
+      A Receita Federal "presume" que um percentual fixo da receita bruta é o lucro da empresa, e aplica os impostos sobre essa base presumida.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Tributo</th>
+          <th>Base de Cálculo</th>
+          <th>Alíquota</th>
+          <th>% Efetiva sobre Receita</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>IRPJ — Imposto de Renda PJ</td>
+          <td>8% da Receita (presunção comércio)</td>
+          <td>15%</td>
+          <td>1,20%</td>
+        </tr>
+        <tr>
+          <td>CSLL — Contribuição Social</td>
+          <td>8% da Receita (presunção comércio)</td>
+          <td>9%</td>
+          <td>0,72%</td>
+        </tr>
+        <tr>
+          <td>PIS — Cumulativo</td>
+          <td>Receita Bruta</td>
+          <td>0,65%</td>
+          <td>0,65%</td>
+        </tr>
+        <tr>
+          <td>COFINS — Cumulativo</td>
+          <td>Receita Bruta</td>
+          <td>3,00%</td>
+          <td>3,00%</td>
+        </tr>
+        <tr style="background:#fff7f0; font-weight:700;">
+          <td style="color:#FF6A00;">TOTAL</td>
+          <td>—</td>
+          <td>—</td>
+          <td style="color:#FF6A00; font-weight:900; font-size:14px;">≈ 5,57%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="formula">
+      Exemplo — Receita de R$ 2.550.000:<br>
+      Impostos LP = R$ 2.550.000 × 5,57% = <span class="result">R$ 142.035</span>
+    </div>
+    <div class="alerta">
+      <div class="alerta-icon">💡</div>
+      <p><strong>Para o apresentador:</strong> 5,57% de carga tributária efetiva é <strong>muito baixa</strong> para o setor. Empresas no Lucro Real podem pagar 25–34% sobre o lucro. O Lucro Presumido é vantajoso para operações de comércio com boa margem.</p>
+    </div>
+  </div>
+
+  <!-- 5. DRE COMPLETO -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">5</div>
+      <h2>DRE — Como a Calculadora Calcula o Resultado</h2>
+    </div>
+    <p style="color:#444; margin-bottom:16px;">
+      O Demonstrativo de Resultados (DRE) mostra cada etapa do cálculo, do faturamento bruto até o lucro líquido real:
+    </p>
+    <div class="dre-box">
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(+)</span> Receita Bruta de Vendas</span>
+        <span class="dre-value">Qtd. containers × (Custo + Lucro do lote)</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> Custo de Aquisição + Nacionalização</span>
+        <span class="dre-value">Qtd. containers × Custo do lote</span>
+      </div>
+      <div class="dre-linha total">
+        <span class="dre-label">(=) Lucro Bruto Operacional</span>
+        <span class="dre-value">Receita − Custo</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> Impostos Lucro Presumido</span>
+        <span class="dre-value">Receita × 5,57%</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> OPEX do Ciclo (R$ 55k × 3 meses)</span>
+        <span class="dre-value">R$ 165.000 (fixo)</span>
+      </div>
+      <div class="dre-linha total">
+        <span class="dre-label">(=) LUCRO LÍQUIDO REAL</span>
+        <span class="dre-value">Resultado Final</span>
+      </div>
+    </div>
+
+    <p style="color:#444; margin-top:16px; margin-bottom:12px;"><strong>Exemplo com Lote A — 3 containers — Capital R$ 1.650.000:</strong></p>
+    <div class="dre-box">
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(+)</span> Receita Bruta (3 × R$ 850k)</span>
+        <span class="dre-value" style="color:#fff;">R$ 2.550.000</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> Custo (3 × R$ 550k)</span>
+        <span class="dre-value" style="color:#AEAEB2;">− R$ 1.650.000</span>
+      </div>
+      <div class="dre-linha total">
+        <span class="dre-label">(=) Lucro Bruto Operacional</span>
+        <span class="dre-value">R$ 900.000</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> Impostos LP (R$ 2.550k × 5,57%)</span>
+        <span class="dre-value" style="color:#AEAEB2;">− R$ 142.035</span>
+      </div>
+      <div class="dre-linha">
+        <span class="dre-label"><span class="dre-sinal">(−)</span> OPEX 3 meses</span>
+        <span class="dre-value" style="color:#AEAEB2;">− R$ 165.000</span>
+      </div>
+      <div class="dre-linha total">
+        <span class="dre-label">(=) Lucro Líquido Real</span>
+        <span class="dre-value" style="font-size:18px;">R$ 592.965</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. ROI E MARGEM -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">6</div>
+      <h2>ROI e Margem Líquida</h2>
+    </div>
+    <div class="formula">
+      ROI = Lucro Líquido ÷ Capital Aportado × 100<br>
+      Exemplo: R$ 592.965 ÷ R$ 1.650.000 × 100 = <span class="result">35,9% em 3 meses</span>
+    </div>
+    <div class="formula">
+      Margem Líquida = Lucro Líquido ÷ Receita Bruta × 100<br>
+      Exemplo: R$ 592.965 ÷ R$ 2.550.000 × 100 = <span class="result">23,3% de margem</span>
+    </div>
+    <div class="alerta">
+      <div class="alerta-icon">⚠️</div>
+      <p><strong>Atenção:</strong> O ROI é referente ao ciclo de 3 meses, não ao ano. Anualizado, esse ROI seria de aproximadamente <strong>143%</strong> (composto) — argumento poderoso para investidores acostumados com benchmarks de fundos (CDI, FIIs, etc.).</p>
+    </div>
+  </div>
+
+  <!-- 7. OPEX -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">7</div>
+      <h2>OPEX Mensal — R$ 55.000</h2>
+    </div>
+    <p style="color:#444; margin-bottom:12px;">
+      O OPEX (custo operacional) é fixo e não varia com o volume de containers. Isso é o que torna a operação <strong>altamente alavancada</strong>: quanto mais containers simultâneos, menor o peso do OPEX sobre cada um.
+    </p>
+    <table>
+      <thead>
+        <tr><th>Containers</th><th>OPEX 3 meses</th><th>OPEX por Container</th><th>Impacto no ROI</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1 container</td><td>R$ 165.000</td><td>R$ 165.000/ct</td><td>Alto peso relativo</td></tr>
+        <tr><td>2 containers</td><td>R$ 165.000</td><td>R$ 82.500/ct</td><td>Peso reduzido à metade</td></tr>
+        <tr><td>3 containers</td><td>R$ 165.000</td><td>R$ 55.000/ct</td><td>Diluição significativa</td></tr>
+        <tr><td>5 containers</td><td>R$ 165.000</td><td>R$ 33.000/ct</td><td>Alta eficiência operacional</td></tr>
+        <tr><td>9 containers</td><td>R$ 165.000</td><td>R$ 18.333/ct</td><td>OPEX praticamente irrelevante</td></tr>
+      </tbody>
+    </table>
+    <div class="highlight-card">
+      <p>💡 <strong>Argumento para investidores:</strong> Com mais capital aportado, o OPEX fixo de R$ 55k/mês se dilui entre mais containers, melhorando o ROI. A escala é a chave da eficiência desta operação.</p>
+    </div>
+  </div>
+
+  <!-- 8. PONTOS-CHAVE -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">8</div>
+      <h2>Pontos-Chave para o Apresentador</h2>
+    </div>
+    <ul class="checklist">
+      <li>
+        <div class="check-icon">1</div>
+        <div>
+          <div class="check-label">O ciclo é de 3 meses — capital auto-liquidável</div>
+          <div class="check-desc">Pedido na China → Produção → Frete marítimo → Desembaraço → Venda. O capital retorna dentro do próprio ciclo.</div>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon">2</div>
+        <div>
+          <div class="check-label">II e IPI são zero — vantagem exclusiva dos elétricos</div>
+          <div class="check-desc">Motos a combustão pagam II de 35% + IPI de até 25%. Os veículos elétricos são isentos, reduzindo drasticamente o custo de importação.</div>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon">3</div>
+        <div>
+          <div class="check-label">Lucro Presumido = apenas 5,57% sobre receita</div>
+          <div class="check-desc">Carga tributária muito competitiva. Empresas no Lucro Real pagam entre 25% e 34% sobre o lucro real. O regime atual é vantajoso para esta operação.</div>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon">4</div>
+        <div>
+          <div class="check-label">A escala diluiu o OPEX — ROI melhora com volume</div>
+          <div class="check-desc">O custo fixo de R$ 55k/mês não muda. Dobrar os containers praticamente dobra o lucro líquido, sem dobrar os custos operacionais.</div>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon">5</div>
+        <div>
+          <div class="check-label">O lucro declarado é conservador</div>
+          <div class="check-desc">Os valores de lucro por lote (R$ 300k–R$ 400k) são baseados em dados reais de operação. Não são projeções especulativas.</div>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon">6</div>
+        <div>
+          <div class="check-label">A receita é calculada automaticamente</div>
+          <div class="check-desc">Receita = Custo do lote + Lucro do lote. Exemplo Lote A: R$ 550k custo + R$ 300k lucro = R$ 850k de receita por container.</div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 9. AVISOS DA CALCULADORA -->
+  <div class="secao">
+    <div class="secao-titulo">
+      <div class="secao-num">9</div>
+      <h2>Mensagens de Aviso na Calculadora</h2>
+    </div>
+    <div class="alerta" style="margin-bottom:12px;">
+      <div class="alerta-icon">⚠️</div>
+      <p><strong>"Capital insuficiente para adquirir 1 container deste tipo"</strong><br>
+      O valor no slider é menor que o custo de 1 container. Solução: aumentar o capital ou selecionar um lote menor.</p>
+    </div>
+    <div class="alerta">
+      <div class="alerta-icon">⚠️</div>
+      <p><strong>"Lucro dos lotes não cobre tributos + OPEX"</strong><br>
+      Com poucos containers, o lucro bruto não é suficiente para cobrir os impostos do LP mais o OPEX do ciclo. Resultado líquido negativo. Solução: aumentar o capital para liberar mais containers simultaneamente.</p>
+    </div>
+  </div>
+
+  <!-- RODAPÉ -->
+  <div class="rodape-pagina">
+    <div>TM GROUP © 2026 — Manual Interno da Calculadora Financeira</div>
+    <div><span>CONFIDENCIAL</span> — Uso exclusivo do apresentador</div>
+  </div>
+
+</div>
+
+<!-- Script para abrir janela de impressão automaticamente -->
+<script>
+  // Remove o script tag do print
+</script>
+
+</body>
+</html>
