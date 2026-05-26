@@ -106,74 +106,71 @@ export default function S05Estrutura() {
             </div>
           </div>
 
-          {/* ── BANCO GALÁPAGOS — Perfil de Crédito ── */}
-          <div className="flex-1 rounded-2xl overflow-hidden glow-orange animate-fade-up delay-400"
-            style={{ background: 'rgba(255,106,0,0.06)', border: '1px solid rgba(255,106,0,0.5)', minHeight: 0 }}>
+          {/* ── Vantagem Competitiva — O que não se copia ── */}
+          <div className="flex-1 rounded-2xl overflow-hidden animate-fade-up delay-400"
+            style={{ background: '#0A0A0A', border: '1px solid #1A1A1A', minHeight: 0, position: 'relative' }}>
 
-            {/* Header com nome do banco */}
+            {/* Número de impacto em marca d'água */}
             <div style={{
-              background: 'rgba(255,106,0,0.12)',
-              borderBottom: '1px solid rgba(255,106,0,0.3)',
-              padding: '8px 14px',
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+              position: 'absolute', right: 16, top: '50%',
+              transform: 'translateY(-50%)',
+              fontSize: 96, fontWeight: 900, color: 'rgba(255,106,0,0.06)',
+              lineHeight: 1, pointerEvents: 'none', userSelect: 'none',
+              letterSpacing: '-0.04em',
             }}>
-              <div>
-                <p style={{ color: '#FF6A00', fontSize: 8, fontWeight: 700, letterSpacing: '0.18em', textTransform: 'uppercase' }}>
-                  Apresentado a
-                </p>
-                <p style={{ color: '#FFFFFF', fontSize: 13, fontWeight: 900, letterSpacing: '0.04em' }}>
-                  BANCO GALÁPAGOS
-                </p>
-              </div>
-              <div style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(255,106,0,0.15)',
-                border: '1.5px solid rgba(255,106,0,0.6)',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: 16,
-              }}>
-                🏦
-              </div>
+              10
             </div>
 
-            {/* Perfil de crédito */}
-            <div style={{ padding: '10px 14px', display: 'flex', flexDirection: 'column', gap: 7 }}>
-              <p style={{ color: '#AEAEB2', fontSize: 9, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: 2 }}>
-                Perfil de Crédito & Garantias
-              </p>
+            <div style={{ padding: '14px 16px', display: 'flex', flexDirection: 'column', height: '100%', position: 'relative', zIndex: 1 }}>
 
-              {[
-                { icon: '✓', label: 'Operação auto-liquidável',        desc: 'Ciclo de 3 meses — China → venda. Capital retorna naturalmente.' },
-                { icon: '✓', label: 'Garantia real em estoque físico', desc: 'Cada container é um ativo tangível. Veículos como colateral.' },
-                { icon: '✓', label: 'Demanda validada no mercado',     desc: 'Estoque se esgota antes do próximo container chegar.' },
-                { icon: '✓', label: 'Zero inadimplência no atacado',   desc: '100% de recebimento nas operações B2B validadas.' },
-              ].map((item, i) => (
-                <div key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                  <div style={{
-                    width: 18, height: 18, borderRadius: '50%', flexShrink: 0,
-                    background: 'rgba(255,106,0,0.18)',
-                    border: '1px solid rgba(255,106,0,0.5)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 9, color: '#FF6A00', fontWeight: 900,
+              {/* Header provocativo */}
+              <div style={{ marginBottom: 12 }}>
+                <p style={{ color: '#FF6A00', fontSize: 8, fontWeight: 700, letterSpacing: '0.2em', textTransform: 'uppercase', marginBottom: 3 }}>
+                  Barreira de Entrada
+                </p>
+                <p style={{ color: '#FFFFFF', fontSize: 14, fontWeight: 900, lineHeight: 1.2, letterSpacing: '-0.01em' }}>
+                  O que leva quase 10 anos<br />para construir
+                </p>
+                <p style={{ color: '#3A3A3C', fontSize: 9, marginTop: 4 }}>
+                  — e nenhum concorrente consegue copiar em 12 meses.
+                </p>
+              </div>
+
+              {/* Grid de ativos intangíveis */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, flex: 1 }}>
+                {[
+                  { icon: '🔧', label: 'Expertise Técnica',     desc: 'Conhecimento de produto que o mercado não tem' },
+                  { icon: '🌏', label: 'Fornecedor Direto',      desc: 'Relação com Yadea e fabricantes chineses' },
+                  { icon: '📍', label: '23+ Canais Ativos',      desc: 'Rede física construída loja por loja' },
+                  { icon: '🛡️', label: 'Confiança de Mercado',   desc: 'Reputação e base de clientes real' },
+                  { icon: '🤖', label: 'AVO — IA Proprietária',  desc: 'Sistema que ninguém mais tem no setor' },
+                  { icon: '📦', label: 'Importação Direta',      desc: 'Processo aduaneiro dominado e validado' },
+                ].map((item, i) => (
+                  <div key={i} style={{
+                    display: 'flex', gap: 8, alignItems: 'flex-start',
+                    padding: '7px 10px', borderRadius: 8,
+                    background: 'rgba(255,255,255,0.02)',
+                    border: '1px solid #1C1C1E',
                   }}>
-                    {item.icon}
+                    <span style={{ fontSize: 14, flexShrink: 0, lineHeight: 1 }}>{item.icon}</span>
+                    <div>
+                      <p style={{ color: '#FFFFFF', fontSize: 9.5, fontWeight: 700, lineHeight: 1.2 }}>{item.label}</p>
+                      <p style={{ color: '#8E8E93', fontSize: 8.5, lineHeight: 1.3, marginTop: 1 }}>{item.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p style={{ color: '#FFFFFF', fontSize: 10, fontWeight: 700, lineHeight: 1.2 }}>{item.label}</p>
-                    <p style={{ color: '#8E8E93', fontSize: 9, lineHeight: 1.4, marginTop: 1 }}>{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
 
-              {/* Frase de fechamento */}
+              {/* Frase de impacto */}
               <div style={{
-                marginTop: 4, padding: '7px 10px', borderRadius: 8,
-                background: 'rgba(255,106,0,0.08)',
-                border: '1px solid rgba(255,106,0,0.3)',
+                marginTop: 10,
+                padding: '8px 12px',
+                borderRadius: 8,
+                background: 'linear-gradient(90deg, rgba(255,106,0,0.12) 0%, rgba(255,106,0,0.04) 100%)',
                 borderLeft: '3px solid #FF6A00',
               }}>
-                <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: 10, fontStyle: 'italic', lineHeight: 1.5 }}>
-                  "Capital de giro lastreado em ativos reais, com retorno em 3 meses e demanda de mercado comprovada."
+                <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 10, fontWeight: 600, lineHeight: 1.5, fontStyle: 'italic' }}>
+                  "Não vendemos apenas scooters. Entregamos um ecossistema que levou uma década para existir."
                 </p>
               </div>
             </div>
