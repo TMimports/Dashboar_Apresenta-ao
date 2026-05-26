@@ -86,20 +86,21 @@ export default function App() {
     <div style={{
       width: '100vw', height: '100vh',
       background: '#000000',
-      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      position: 'relative',
       overflow: 'hidden',
     }}>
       {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
 
-      {/* Canvas fixo 1280×720 escalado para caber na tela */}
+      {/* Canvas fixo 1280×720 centralizado e escalado — SEM SlideNav dentro */}
       <div style={{
         width: CANVAS_W,
         height: CANVAS_H,
-        transform: `scale(${scale})`,
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: `translate(-50%, -50%) scale(${scale})`,
         transformOrigin: 'center center',
-        position: 'relative',
         overflow: 'hidden',
-        flexShrink: 0,
       }}>
         <div
           key={current}
@@ -112,16 +113,17 @@ export default function App() {
         >
           <CurrentSlide />
         </div>
-
-        <SlideNav
-          current={current}
-          total={SLIDES.length}
-          titles={SLIDE_TITLES}
-          onNext={next}
-          onPrev={prev}
-          onGoTo={goTo}
-        />
       </div>
+
+      {/* SlideNav FORA do canvas — posicionado no viewport real */}
+      <SlideNav
+        current={current}
+        total={SLIDES.length}
+        titles={SLIDE_TITLES}
+        onNext={next}
+        onPrev={prev}
+        onGoTo={goTo}
+      />
 
       <style>{`
         @keyframes slideInRight {

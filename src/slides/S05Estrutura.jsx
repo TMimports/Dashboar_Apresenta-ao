@@ -53,11 +53,11 @@ export default function S05Estrutura() {
         <div className="flex-1 flex flex-col gap-3 min-h-0 animate-fade-in delay-200">
 
           {/* Grid depts */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 content-start">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 content-start">
             {depts.map((d, i) => (
               <div
                 key={i}
-                className="relative p-2.5 sm:p-3 rounded-xl transition-all duration-300 cursor-default"
+                className="relative p-2 rounded-xl transition-all duration-300 cursor-default"
                 style={{
                   gridColumn: d.highlight ? 'span 2' : undefined,
                   background: d.highlight

@@ -15,7 +15,7 @@ export default function S07Gargalo() {
         background: 'radial-gradient(ellipse 60% 45% at 50% 60%, rgba(255,106,0,0.06) 0%, transparent 70%)',
       }} />
 
-      <div className="mb-4 animate-fade-up">
+      <div className="mb-3 animate-fade-up">
         <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">07 / O Gargalo</p>
         <h2 className="slide-title text-white">O que está limitando<br />nossa velocidade</h2>
       </div>
@@ -23,7 +23,7 @@ export default function S07Gargalo() {
       <div className="slide-row flex-1 min-h-0">
 
         {/* Coluna esquerda — validações */}
-        <div className="flex-1 flex flex-col gap-3 animate-fade-in delay-200">
+        <div className="flex-1 flex flex-col gap-2 animate-fade-in delay-200">
 
           <div className="grid grid-cols-2 gap-2.5">
             {validacoes.map((v, i) => (

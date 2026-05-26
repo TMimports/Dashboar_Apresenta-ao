@@ -42,7 +42,7 @@ export default function S04Ecossistema() {
                 </div>
               )}
               <div
-                className="w-full flex items-center gap-3 px-3 sm:px-4 py-2 rounded-xl transition-all duration-300 hover:scale-[1.01] cursor-default"
+                className="w-full flex items-center gap-3 px-3 sm:px-4 py-1.5 rounded-xl transition-all duration-300 hover:scale-[1.01] cursor-default"
                 style={{
                   background: tierStyle[node.tier].bg,
                   border: `1px solid ${tierStyle[node.tier].border}`,

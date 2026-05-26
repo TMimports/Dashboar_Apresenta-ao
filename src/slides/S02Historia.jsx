@@ -51,17 +51,17 @@ export default function S02Historia() {
         <div className="flex-1 flex flex-col gap-3 min-h-0 animate-fade-in delay-200">
 
           {/* Texto institucional exato */}
-          <div className="p-4 rounded-2xl" style={{ background: '#111111', border: '1px solid #1C1C1E' }}>
-            <p className="text-[#AEAEB2] text-xs leading-relaxed">
+          <div className="p-3 rounded-2xl" style={{ background: '#111111', border: '1px solid #1C1C1E' }}>
+            <p className="text-[#AEAEB2] text-[10px] leading-relaxed">
               A Tecle Motos começou como loja de motopeças, oferecendo manutenção e reposição com foco em qualidade.
               Em <span className="text-white font-semibold">2020</span>, criou a TM Elétricas, sua divisão de scooters elétricas, acompanhando a demanda por mobilidade sustentável.
-              Hoje, a empresa oferece uma cadeia de produtos que vai desde a{' '}
+              Hoje, a empresa oferece uma cadeia que vai desde a{' '}
               <span className="text-white font-semibold">Importação Própria</span>, venda atacado, venda varejo, peças e acessórios,
-              ensino e treinamentos, área de desenvolvimentos própria de{' '}
-              <span className="text-[#FF6B00] font-semibold">Tecnologia e IA</span>.
+              ensino e treinamentos, até área de{' '}
+              <span className="text-[#FF6B00] font-semibold">Tecnologia e IA</span> proprietária.
             </p>
-            <p className="text-[#AEAEB2] text-xs leading-relaxed mt-2">
-              Nasceu há quase <span className="text-white font-semibold">10 anos</span>, construída por sócios operadores, com visão de longo prazo, forte capacidade de execução e profundo conhecimento técnico do setor.
+            <p className="text-[#AEAEB2] text-[10px] leading-relaxed mt-1.5">
+              Nasceu há quase <span className="text-white font-semibold">10 anos</span>, construída por sócios operadores, com visão de longo prazo e profundo conhecimento técnico do setor.
             </p>
           </div>
 
