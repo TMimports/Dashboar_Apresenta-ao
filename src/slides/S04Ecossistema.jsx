@@ -3,7 +3,7 @@ const chain = [
   { label: 'TM IMPORTS',      sub: 'Importação / Atacado',                color: '#FFFFFF', tier: 'mid' },
   { label: 'TECLE MOTOS',     sub: 'Distribuição / Varejo',               color: '#FFFFFF', tier: 'mid' },
   { label: 'TM ACADEMY',      sub: 'Capacitação e Treinamento Técnico',   color: '#FF8C33', tier: 'key' },
-  { label: 'TM TECH',         sub: 'Tecnologia + IA Proprietária',        color: '#FF8C33', tier: 'key' },
+  { label: 'TM TECH',         sub: 'Tecnologia + IA Proprietária',        color: '#AEAEB2', tier: 'low' },
   { label: 'PÓS-VENDA',       sub: 'Oficinas próprias',                   color: '#AEAEB2', tier: 'low' },
   { label: 'TECLEBOM',        sub: 'Proteção Veicular',                   color: '#AEAEB2', tier: 'low' },
   { label: 'CLIENTE FINAL',   sub: 'Experiência completa',                color: '#8E8E93', tier: 'end' },

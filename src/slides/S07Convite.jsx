@@ -193,7 +193,7 @@ export default function S07Convite() {
               marginBottom: 16,
             }}>
               <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: 11, fontStyle: 'italic', lineHeight: 1.6 }}>
-                "O crescimento já começou. O capital apenas acelera."
+                "Construímos o ecossistema. Agora escalamos."
               </p>
             </blockquote>
 
