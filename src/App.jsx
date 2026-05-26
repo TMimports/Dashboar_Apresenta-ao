@@ -2,41 +2,22 @@ import { useState, useEffect, useCallback } from 'react'
 import './index.css'
 import SlideNav from './components/SlideNav'
 import SplashScreen from './components/SplashScreen'
-import S01Cover from './slides/S01Cover'
-import S02Momento from './slides/S02Momento'
-import S03QuemSomos from './slides/S03QuemSomos'
+import S01Cover      from './slides/S01Cover'
+import S02Historia   from './slides/S02Historia'
+import S03Fundadores from './slides/S03Fundadores'
 import S04Ecossistema from './slides/S04Ecossistema'
-import S05Distribuicao from './slides/S05Distribuicao'
-import S06Autoridade from './slides/S06Autoridade'
-import S07Qualidade from './slides/S07Qualidade'
-import S08AssistenciaTecnica from './slides/S08AssistenciaTecnica'
-import S09Tecnologia from './slides/S09Tecnologia'
-import S10Estrutura from './slides/S10Estrutura'
-import S11UnitEconomics from './slides/S11UnitEconomics'
-import S12Oportunidade from './slides/S12Oportunidade'
-import S13Tese from './slides/S13Tese'
-import S14ImpactoEconomico from './slides/S14ImpactoEconomico'
-import SimuladorSlide from './slides/SimuladorSlide'
-import S15RiscoControlado from './slides/S15RiscoControlado'
-import S16OportunidadeEstrategica from './slides/S16OportunidadeEstrategica'
-import S17OQueBuscamos from './slides/S17OQueBuscamos'
-import S18PorQueTM from './slides/S18PorQueTM'
-import S19Encerramento from './slides/S19Encerramento'
+import S05Estrutura  from './slides/S05Estrutura'
+import S06Escala     from './slides/S06Escala'
+import S07Convite    from './slides/S07Convite'
 
 const SLIDES = [
-  S01Cover, S02Momento, S03QuemSomos, S04Ecossistema, S05Distribuicao,
-  S06Autoridade, S07Qualidade, S08AssistenciaTecnica, S09Tecnologia,
-  S10Estrutura, S11UnitEconomics, S12Oportunidade, S13Tese,
-  S14ImpactoEconomico, SimuladorSlide, S15RiscoControlado, S16OportunidadeEstrategica,
-  S17OQueBuscamos, S18PorQueTM, S19Encerramento
+  S01Cover, S02Historia, S03Fundadores, S04Ecossistema,
+  S05Estrutura, S06Escala, S07Convite,
 ]
 
 const SLIDE_TITLES = [
-  'Capa', 'O Momento', 'Quem Somos', 'Ecossistema', 'Distribuição',
-  'Autoridade', 'Qualidade', 'Assistência Técnica', 'Tecnologia',
-  'Estrutura', 'Unit Economics', 'Oportunidade', 'Tese R$5M',
-  'Impacto Econômico', 'Simulador', 'Risco Controlado', 'Oport. Estratégica',
-  'O Que Buscamos', 'Por Que TM', 'Encerramento'
+  'Capa', 'Nossa História', 'Fundadores', 'Ecossistema',
+  'Estrutura', 'Escala & Lotes', 'Parceria',
 ]
 
 export default function App() {
@@ -90,7 +71,6 @@ export default function App() {
   return (
     <div className="relative w-screen h-screen overflow-hidden bg-[#0A0A0A]">
       {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
-      {/* Slide content */}
       <div
         key={current}
         className="w-full h-full"
@@ -103,7 +83,6 @@ export default function App() {
         <CurrentSlide />
       </div>
 
-      {/* Navigation overlay */}
       <SlideNav
         current={current}
         total={SLIDES.length}
