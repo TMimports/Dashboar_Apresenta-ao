@@ -21,13 +21,30 @@ const SLIDE_TITLES = [
   'Estrutura', 'Calculadora', 'O Gargalo', 'Visão Global',
 ]
 
+// Canvas fixo 16:9 — slides sempre renderizados nesse tamanho e escalados para caber na tela
+const CANVAS_W = 1280
+const CANVAS_H = 720
+
 export default function App() {
   const [showSplash, setShowSplash] = useState(true)
-  const [current, setCurrent] = useState(0)
-  const [direction, setDirection] = useState(1)
-  const [animating, setAnimating] = useState(false)
+  const [current, setCurrent]       = useState(0)
+  const [direction, setDirection]   = useState(1)
+  const [animating, setAnimating]   = useState(false)
+  const [scale, setScale]           = useState(1)
   const [touchStartX, setTouchStartX] = useState(null)
   const [touchStartY, setTouchStartY] = useState(null)
+
+  // Calcula escala para que o canvas caiba na viewport mantendo 16:9
+  useEffect(() => {
+    const update = () => {
+      const sx = window.innerWidth  / CANVAS_W
+      const sy = window.innerHeight / CANVAS_H
+      setScale(Math.min(sx, sy))
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   const goTo = useCallback((idx) => {
     if (animating || idx === current) return
@@ -57,7 +74,7 @@ export default function App() {
     if (touchStartX === null) return
     const dx = touchStartX - e.changedTouches[0].clientX
     const dy = touchStartY - e.changedTouches[0].clientY
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) dx > 0 ? next() : prev()
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) dx > 0 ? next() : prev()
     setTouchStartX(null)
     setTouchStartY(null)
   }, [touchStartX, touchStartY, next, prev])
@@ -65,7 +82,6 @@ export default function App() {
   const CurrentSlide = SLIDES[current]
 
   return (
-    /* ── Outer: viewport, fundo preto absoluto ── */
     <div style={{
       width: '100vw', height: '100vh',
       background: '#000000',
@@ -74,20 +90,24 @@ export default function App() {
     }}>
       {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
 
-      {/* ── Container 16:9 travado matematicamente ── */}
+      {/* Canvas fixo 1280×720 escalado para caber na tela */}
       <div style={{
-        width: 'min(100vw, calc(100vh * 16 / 9))',
-        height: 'min(100vh, calc(100vw * 9 / 16))',
+        width: CANVAS_W,
+        height: CANVAS_H,
+        transform: `scale(${scale})`,
+        transformOrigin: 'center center',
         position: 'relative',
         overflow: 'hidden',
         flexShrink: 0,
       }}>
         <div
           key={current}
-          className="w-full h-full"
+          style={{
+            width: '100%', height: '100%',
+            animation: `${direction > 0 ? 'slideInRight' : 'slideInLeft'} 0.35s ease-out forwards`,
+          }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
-          style={{ animation: `${direction > 0 ? 'slideInRight' : 'slideInLeft'} 0.35s ease-out forwards` }}
         >
           <CurrentSlide />
         </div>

@@ -5,6 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    // Canvas fixo 1280×720 escalado — breakpoints colapsados para 0px
+    // assim sm:/md:/lg: sempre ativam independente do viewport real
+    screens: {
+      'sm':  '0px',
+      'md':  '0px',
+      'lg':  '0px',
+      'xl':  '0px',
+      '2xl': '0px',
+    },
     extend: {
       colors: {
         tm: {
