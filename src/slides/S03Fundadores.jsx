@@ -9,28 +9,27 @@ const competencias = [
   { area: 'Expansão', detail: 'Franquias, governança de escala e due diligence' },
 ]
 
-function DiretoesImagem() {
-  const [imgError, setImgError] = useState(false)
+function FotoCorpoDiretor() {
+  const [err, setErr] = useState(false)
 
-  if (!imgError) {
+  if (!err) {
     return (
       <img
-        src="/assets/images/diretores_executivos.jpg"
+        src="/assets/images/02.jpg"
         alt="Corpo Diretor TM GROUP"
-        onError={() => setImgError(true)}
+        onError={() => setErr(true)}
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center top',
           borderRadius: 12,
-          filter: 'brightness(0.92) contrast(1.05)',
+          filter: 'brightness(0.95) contrast(1.04)',
         }}
       />
     )
   }
 
-  /* Fallback elegante enquanto a imagem não é adicionada */
   return (
     <div className="w-full h-full flex flex-col items-center justify-center rounded-xl"
       style={{ background: 'rgba(255,107,0,0.05)', border: '1px dashed rgba(255,107,0,0.3)' }}>
@@ -38,13 +37,10 @@ function DiretoesImagem() {
         style={{ background: 'rgba(255,107,0,0.15)', border: '2px solid rgba(255,107,0,0.5)', color: '#FF6B00' }}>
         F
       </div>
-      <p style={{ color: '#FF6B00', fontSize: 11, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+      <p style={{ color: '#FF6B00', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
         Felipe Henrique Silva
       </p>
       <p style={{ color: '#8E8E93', fontSize: 10, marginTop: 4 }}>Co-fundador & Diretor Executivo</p>
-      <p style={{ color: '#3A3A3C', fontSize: 9, marginTop: 12, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-        Adicionar: public/assets/images/diretores_executivos.jpg
-      </p>
     </div>
   )
 }
@@ -66,22 +62,14 @@ export default function S03Fundadores() {
 
       <div className="slide-row flex-1 min-h-0">
 
-        {/* Foto real dos diretores */}
-        <div
-          className="slide-sidebar-lg flex flex-col gap-4 animate-slide-left delay-200"
-          style={{ minHeight: 220 }}>
+        {/* Foto real tv03 */}
+        <div className="slide-sidebar-lg flex flex-col gap-4 animate-slide-left delay-200" style={{ minHeight: 220 }}>
 
-          {/* Container da imagem */}
           <div className="flex-1 rounded-2xl overflow-hidden glow-orange"
-            style={{
-              border: '1px solid rgba(255,107,0,0.35)',
-              minHeight: 180,
-              maxHeight: 340,
-            }}>
-            <DiretoesImagem />
+            style={{ border: '1px solid rgba(255,107,0,0.35)', minHeight: 180, maxHeight: 340 }}>
+            <FotoCorpoDiretor />
           </div>
 
-          {/* Quote abaixo da imagem */}
           <div className="p-4 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <blockquote className="border-l-2 border-[#FF6B00] pl-3">
               <p className="text-white font-semibold text-sm italic leading-relaxed">
@@ -91,10 +79,9 @@ export default function S03Fundadores() {
           </div>
         </div>
 
-        {/* Perfil + Competências */}
+        {/* Perfil + competências */}
         <div className="flex-1 flex flex-col gap-3 animate-slide-right delay-300">
 
-          {/* Card executivo Felipe */}
           <div className="p-4 sm:p-5 rounded-2xl"
             style={{ background: 'rgba(255,107,0,0.06)', border: '1px solid rgba(255,107,0,0.3)' }}>
             <p className="text-white font-black text-base mb-0.5">Felipe Henrique Silva</p>
@@ -120,7 +107,6 @@ export default function S03Fundadores() {
             </div>
           </div>
 
-          {/* Matriz de competências */}
           <div className="flex-1">
             <p className="text-[10px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Domínios de Competência</p>
             <div className="grid grid-cols-2 gap-2">

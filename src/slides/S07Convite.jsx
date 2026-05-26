@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Mail } from 'lucide-react'
 
 const pontos = [
@@ -19,9 +20,28 @@ const pontos = [
   {
     n: '04',
     titulo: 'Domínio de Mercado',
-    detalhe: 'Capital institucional como alavanca para liderança de mercado — não como suporte operacional.',
+    detalhe: 'Capital institucional como alavanca para liderança — não como suporte operacional.',
   },
 ]
+
+function FotoParceria() {
+  const [err, setErr] = useState(false)
+  if (err) return null
+  return (
+    <div className="rounded-xl overflow-hidden mb-3" style={{ height: 130, border: '1px solid rgba(255,107,0,0.25)' }}>
+      <img
+        src="/assets/images/parceria.jpg"
+        alt="Parceria B2B TM GROUP"
+        onError={() => setErr(true)}
+        style={{
+          width: '100%', height: '100%',
+          objectFit: 'cover', objectPosition: 'center',
+          filter: 'brightness(0.75) saturate(0.85)',
+        }}
+      />
+    </div>
+  )
+}
 
 export default function S07Convite() {
   return (
@@ -63,8 +83,11 @@ export default function S07Convite() {
           ))}
         </div>
 
-        {/* Sidebar — tese de fechamento */}
-        <div className="slide-sidebar flex flex-col gap-4 animate-slide-right delay-300">
+        {/* Sidebar — imagem parceria + tese de fechamento */}
+        <div className="slide-sidebar flex flex-col gap-3 animate-slide-right delay-300">
+
+          {/* Imagem parceria (tv04) */}
+          <FotoParceria />
 
           {/* KPIs */}
           <div className="grid grid-cols-2 gap-2.5">
@@ -82,13 +105,13 @@ export default function S07Convite() {
           </div>
 
           {/* Tese principal */}
-          <div className="flex-1 p-5 rounded-2xl glow-orange"
+          <div className="flex-1 p-4 rounded-2xl glow-orange"
             style={{ background: 'rgba(255,107,0,0.06)', border: '1px solid rgba(255,107,0,0.35)' }}>
             <p className="text-[#FF6B00] text-[10px] font-bold uppercase tracking-widest mb-3">Tese de Fechamento</p>
             <p className="text-white font-semibold text-sm leading-relaxed mb-4">
-              O TM GROUP provou execução e liquidez. O capital institucional não é suporte — é a alavanca para dominar o mercado.
+              O TM GROUP provou execução. O capital institucional não é suporte — é a alavanca para dominar o mercado.
             </p>
-            <div className="space-y-2.5">
+            <div className="space-y-2">
               {[
                 'Neutralizar 3 meses de lead time',
                 'Disparar múltiplos lotes em paralelo',
@@ -103,10 +126,7 @@ export default function S07Convite() {
           </div>
 
           {/* CTA */}
-          <a
-            href="mailto:teclemotos@teclemotos.com"
-            className="btn-primary justify-center text-center"
-            style={{ letterSpacing: '0.02em' }}>
+          <a href="mailto:teclemotos@teclemotos.com" className="btn-primary justify-center text-center">
             <Mail size={15} />
             Solicitar Reunião Executiva
           </a>

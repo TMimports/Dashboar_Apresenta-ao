@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 const lotes = [
   { tipo: 'A', desc: 'Scooters Menores', unidades: 240, margem: 'R$ 300.000', color: '#FF6B00' },
   { tipo: 'B', desc: 'Scooters Maiores', unidades: 197, margem: 'R$ 400.000', color: '#FF8C33' },
@@ -7,9 +9,24 @@ const lotes = [
 const historico = [
   { label: 'Dez/2024',  desc: '1 container — início do ciclo orgânico',                  destaque: false },
   { label: 'Atual',     desc: '2 containers vendidos + 2 na China (chegada: julho)',      destaque: true  },
-  { label: 'Jul/2025',  desc: 'Faturamento + pedido de +3 containers. Mais 2 em prod.', destaque: false },
+  { label: 'Jul/2025',  desc: 'Faturamento + pedido de +3 containers. +2 em produção.', destaque: false },
   { label: 'Projeção',  desc: '16 a 20 containers no período via capital próprio',        destaque: true  },
 ]
+
+function FotoOperacoes() {
+  const [err, setErr] = useState(false)
+  if (err) return null
+  return (
+    <div className="rounded-xl overflow-hidden mb-3" style={{ height: 110, border: '1px solid #2C2C2E' }}>
+      <img
+        src="/assets/images/operacoes.jpg"
+        alt="Operações TM GROUP"
+        onError={() => setErr(true)}
+        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.7) saturate(0.8)' }}
+      />
+    </div>
+  )
+}
 
 export default function S06Escala() {
   return (
@@ -28,23 +45,24 @@ export default function S06Escala() {
 
       <div className="slide-row flex-1 min-h-0">
 
-        {/* Coluna esquerda — OPEX + Giro + Histórico */}
+        {/* Coluna esquerda — imagem + OPEX + Giro + Histórico */}
         <div className="slide-sidebar flex flex-col gap-3 animate-slide-left delay-200">
+
+          {/* Foto de operações/containers */}
+          <FotoOperacoes />
 
           {/* OPEX destaque */}
           <div className="p-4 sm:p-5 rounded-2xl glow-orange text-center"
             style={{ background: 'rgba(255,107,0,0.08)', border: '1px solid rgba(255,107,0,0.5)' }}>
             <p className="text-[10px] text-[#FF6B00] uppercase tracking-widest font-medium mb-1">OPEX Mensal Consolidado</p>
-            <p className="font-black text-white" style={{ fontSize: 'clamp(1.75rem, 4vw, 2.5rem)' }}>R$ 55.000</p>
+            <p className="font-black text-white" style={{ fontSize: 'clamp(1.5rem, 3.5vw, 2.2rem)' }}>R$ 55.000</p>
             <p className="text-[#8E8E93] text-xs mt-1">Alta alavancagem operacional</p>
           </div>
 
           {/* Algoritmo de giro */}
           <div className="p-4 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
             <p className="text-[10px] text-[#8E8E93] uppercase tracking-widest font-medium mb-2">Algoritmo de Giro</p>
-            <p className="text-white text-sm font-semibold mb-1">
-              Ciclo médio: <span style={{ color: '#FF6B00' }}>3 meses</span>
-            </p>
+            <p className="text-white text-sm font-semibold mb-1">Ciclo médio: <span style={{ color: '#FF6B00' }}>3 meses</span></p>
             <p className="text-[#8E8E93] text-xs mb-2">Importação → Trânsito marítimo → Nacionalização</p>
             <div className="flex items-center gap-1 text-xs flex-wrap">
               <span className="text-[#8E8E93]">Chegam N</span>
