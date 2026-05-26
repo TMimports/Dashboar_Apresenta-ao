@@ -18,19 +18,34 @@ const historico = [
 ]
 
 function FotoOps() {
-  const [src, setSrc] = useState('/assets/images/03.jpg')
   const [err, setErr] = useState(false)
-
-  const handleError = () => {
-    if (src === '/assets/images/03.jpg') { setSrc('/assets/images/operacoes.jpg'); return }
-    setErr(true)
-  }
 
   if (err) return null
   return (
-    <div className="rounded-xl overflow-hidden mb-3" style={{ height: 80, border: '1px solid #222' }}>
-      <img src={src} alt="Operações" onError={handleError}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(0.7)' }} />
+    <div className="rounded-xl overflow-hidden mb-3"
+      style={{ height: 90, border: '1px solid rgba(255,106,0,0.2)', position: 'relative', flexShrink: 0 }}>
+      <img
+        src="/assets/images/03.jpg"
+        alt="Tanzania — Zanzibar"
+        onError={() => setErr(true)}
+        style={{
+          position: 'absolute', inset: 0,
+          width: '100%', height: '100%',
+          objectFit: 'cover', objectPosition: 'center',
+          filter: 'brightness(0.6) saturate(0.8)',
+        }}
+      />
+      <div style={{
+        position: 'absolute', inset: 0,
+        background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)',
+      }} />
+      <p style={{
+        position: 'absolute', bottom: 6, left: 10,
+        color: 'rgba(255,106,0,0.9)', fontSize: 9, fontWeight: 700,
+        letterSpacing: '0.12em', textTransform: 'uppercase',
+      }}>
+        Tanzania — Zanzibar & Pemba
+      </p>
     </div>
   )
 }

@@ -31,20 +31,44 @@ const redes = [
   { nome: 'Yadea Global',status: 'Parceria internacional', color: '#8E8E93' },
 ]
 
-function FotoParceria() {
-  const [src, setSrc] = useState('/assets/images/04.jpg')
-  const [err, setErr] = useState(false)
+function FotosParceria() {
+  const [err04, setErr04] = useState(false)
+  const [err05, setErr05] = useState(false)
 
-  const handleError = () => {
-    if (src === '/assets/images/04.jpg') { setSrc('/assets/images/parceria.jpg'); return }
-    setErr(true)
-  }
-
-  if (err) return null
   return (
-    <div className="rounded-xl overflow-hidden" style={{ height: 110, border: '1px solid rgba(255,106,0,0.25)', flexShrink: 0 }}>
-      <img src={src} alt="Parceria B2B" onError={handleError}
-        style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.72) saturate(0.85)' }} />
+    <div className="flex gap-2 mb-1" style={{ flexShrink: 0 }}>
+      {/* 04.jpg — Lojas Mel */}
+      {!err04 && (
+        <div className="flex-1 rounded-xl overflow-hidden"
+          style={{ height: 80, border: '1px solid rgba(255,106,0,0.25)', position: 'relative' }}>
+          <img
+            src="/assets/images/04.jpg"
+            alt="Lojas Mel"
+            onError={() => setErr04(true)}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.65) saturate(0.8)' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)' }} />
+          <p style={{ position: 'absolute', bottom: 5, left: 8, color: '#FF6A00', fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            Lojas Mel
+          </p>
+        </div>
+      )}
+      {/* 05.jpg — Casas Bahia */}
+      {!err05 && (
+        <div className="flex-1 rounded-xl overflow-hidden"
+          style={{ height: 80, border: '1px solid rgba(255,106,0,0.15)', position: 'relative' }}>
+          <img
+            src="/assets/images/05.jpg"
+            alt="Casas Bahia"
+            onError={() => setErr05(true)}
+            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', filter: 'brightness(0.65) saturate(0.8)' }}
+          />
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%)' }} />
+          <p style={{ position: 'absolute', bottom: 5, left: 8, color: '#AEAEB2', fontSize: 8, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+            Casas Bahia
+          </p>
+        </div>
+      )}
     </div>
   )
 }
@@ -101,7 +125,7 @@ export default function S07Convite() {
         {/* Sidebar fechamento */}
         <div className="slide-sidebar flex flex-col gap-3 animate-slide-right delay-300">
 
-          <FotoParceria />
+          <FotosParceria />
 
           {/* KPIs */}
           <div className="grid grid-cols-2 gap-2">

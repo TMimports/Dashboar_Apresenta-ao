@@ -45,7 +45,7 @@ export default function S02Historia() {
 
       <div className="mb-4 md:mb-6 animate-fade-up">
         <p className="text-[#FF6B00] text-xs font-medium tracking-widest uppercase mb-2">02 / Nossa História</p>
-        <h2 className="slide-title text-white">Evolução Industrial</h2>
+        <h2 className="slide-title text-white">Nossa História</h2>
         <p className="text-[#8E8E93] mt-1 text-sm italic">"Antes de escalar, construímos uma base sólida."</p>
       </div>
 

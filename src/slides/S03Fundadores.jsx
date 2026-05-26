@@ -9,43 +9,9 @@ const competencias = [
   { area: 'Expansão', detail: 'Franquias, governança de escala e due diligence' },
 ]
 
-function FotoCorpoDiretor() {
-  const [err, setErr] = useState(false)
-
-  if (!err) {
-    return (
-      <img
-        src="/assets/images/02.jpg"
-        alt="Corpo Diretor TM GROUP"
-        onError={() => setErr(true)}
-        style={{
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center top',
-          borderRadius: 12,
-          filter: 'brightness(0.95) contrast(1.04)',
-        }}
-      />
-    )
-  }
-
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center rounded-xl"
-      style={{ background: 'rgba(255,107,0,0.05)', border: '1px dashed rgba(255,107,0,0.3)' }}>
-      <div className="w-16 h-16 rounded-full flex items-center justify-center mb-3 font-black text-3xl"
-        style={{ background: 'rgba(255,107,0,0.15)', border: '2px solid rgba(255,107,0,0.5)', color: '#FF6B00' }}>
-        F
-      </div>
-      <p style={{ color: '#FF6B00', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-        Felipe Henrique Silva
-      </p>
-      <p style={{ color: '#8E8E93', fontSize: 10, marginTop: 4 }}>Co-fundador & Diretor Executivo</p>
-    </div>
-  )
-}
-
 export default function S03Fundadores() {
+  const [imgErr, setImgErr] = useState(false)
+
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden slide-pad"
       style={{ background: '#0A0A0A' }}>
@@ -55,19 +21,67 @@ export default function S03Fundadores() {
         background: 'radial-gradient(ellipse 35% 55% at 15% 50%, rgba(255,107,0,0.04) 0%, transparent 65%)',
       }} />
 
-      <div className="mb-4 md:mb-5 animate-fade-up">
-        <p className="text-[#FF6B00] text-xs font-medium tracking-widest uppercase mb-2">03 / Corpo Diretor</p>
-        <h2 className="slide-title text-white">Fundadores & Matriz de Execução</h2>
+      <div className="mb-3 animate-fade-up">
+        <p className="text-[#FF6B00] text-xs font-medium tracking-widest uppercase mb-1">03 / Corpo Diretor</p>
+        <h2 className="slide-title text-white">Fundadores & Governança</h2>
       </div>
 
       <div className="slide-row flex-1 min-h-0">
 
-        {/* Foto real tv03 */}
-        <div className="slide-sidebar-lg flex flex-col gap-4 animate-slide-left delay-200" style={{ minHeight: 220 }}>
+        {/* Foto real — ocupa toda a sidebar sem corte */}
+        <div className="slide-sidebar-lg animate-slide-left delay-200 flex flex-col gap-3">
 
           <div className="flex-1 rounded-2xl overflow-hidden glow-orange"
-            style={{ border: '1px solid rgba(255,107,0,0.35)', minHeight: 180, maxHeight: 340 }}>
-            <FotoCorpoDiretor />
+            style={{
+              border: '1px solid rgba(255,107,0,0.35)',
+              minHeight: 160,
+              position: 'relative',
+            }}>
+
+            {!imgErr ? (
+              <img
+                src="/assets/images/02.jpg"
+                alt="Corpo Diretor TM GROUP"
+                onError={() => setImgErr(true)}
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center top',
+                  borderRadius: 16,
+                }}
+              />
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center rounded-xl"
+                style={{ background: 'rgba(255,107,0,0.05)', border: '1px dashed rgba(255,107,0,0.3)' }}>
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-3 font-black text-3xl"
+                  style={{ background: 'rgba(255,107,0,0.15)', border: '2px solid rgba(255,107,0,0.5)', color: '#FF6B00' }}>
+                  TM
+                </div>
+                <p style={{ color: '#FF6B00', fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  Corpo Diretor
+                </p>
+              </div>
+            )}
+
+            {/* Overlay legenda sobre a foto */}
+            {!imgErr && (
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                background: 'linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 100%)',
+                borderRadius: '0 0 16px 16px',
+                padding: '1.5rem 1rem 0.75rem',
+              }}>
+                <p style={{ color: '#FF6B00', fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
+                  Codemar — Maricá, RJ
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 11, marginTop: 2 }}>
+                  Entrega de veículos elétricos à Guarda Municipal
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="p-4 rounded-xl" style={{ background: '#1C1C1E', border: '1px solid #2C2C2E' }}>
