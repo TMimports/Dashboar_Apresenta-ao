@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mail, ArrowRight, Zap } from 'lucide-react'
+import { Mail, ArrowRight, Zap, Rocket, Bike } from 'lucide-react'
 
 export default function S01Cover() {
   const [imgError, setImgError] = useState(false)
@@ -117,6 +117,33 @@ export default function S01Cover() {
           </span>"
         </p>
 
+        {/* Ícones premium de identidade */}
+        <div className="animate-fade-up delay-600 flex items-center justify-center gap-6 mb-8">
+          {[
+            { Icon: Rocket, label: 'Aceleração' },
+            { Icon: Bike,   label: 'Moto Elétrica' },
+            { Icon: Zap,    label: 'Energia' },
+          ].map(({ Icon, label }, i) => (
+            <div key={i} className="flex flex-col items-center gap-1.5">
+              <div style={{
+                width: 'clamp(40px, 6vw, 56px)',
+                height: 'clamp(40px, 6vw, 56px)',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(255,107,0,0.18) 0%, rgba(255,107,0,0.06) 70%)',
+                border: '1px solid rgba(255,107,0,0.45)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 0 18px rgba(255,107,0,0.22)',
+                animation: `icon-glow 3s ease-in-out ${i * 0.4}s infinite`,
+              }}>
+                <Icon size="clamp(16px, 2.5vw, 22px)" color="#FF6B00" strokeWidth={1.8} style={{ width: 'clamp(16px, 2.5vw, 22px)', height: 'clamp(16px, 2.5vw, 22px)' }} />
+              </div>
+              <span style={{ color: 'rgba(255,107,0,0.7)', fontSize: 'clamp(7px, 1vw, 9px)', fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+                {label}
+              </span>
+            </div>
+          ))}
+        </div>
+
         {/* CTAs */}
         <div className="animate-fade-up delay-700 flex flex-wrap gap-3 justify-center">
           <a href="mailto:teclemotos@teclemotos.com" className="btn-primary">
@@ -143,6 +170,10 @@ export default function S01Cover() {
         @keyframes cover-logo-glow {
           0%, 100% { filter: drop-shadow(0 0 12px rgba(255,107,0,0.55)); }
           50%       { filter: drop-shadow(0 0 28px rgba(255,107,0,0.95)) drop-shadow(0 0 56px rgba(255,107,0,0.25)); }
+        }
+        @keyframes icon-glow {
+          0%, 100% { box-shadow: 0 0 14px rgba(255,107,0,0.2); border-color: rgba(255,107,0,0.35); }
+          50%       { box-shadow: 0 0 28px rgba(255,107,0,0.55); border-color: rgba(255,107,0,0.75); }
         }
       `}</style>
     </div>

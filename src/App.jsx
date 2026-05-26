@@ -8,16 +8,17 @@ import S03Fundadores from './slides/S03Fundadores'
 import S04Ecossistema from './slides/S04Ecossistema'
 import S05Estrutura  from './slides/S05Estrutura'
 import S06Escala     from './slides/S06Escala'
-import S07Convite    from './slides/S07Convite'
+import S07Gargalo    from './slides/S07Gargalo'
+import S08Convite    from './slides/S07Convite'
 
 const SLIDES = [
   S01Cover, S02Historia, S03Fundadores, S04Ecossistema,
-  S05Estrutura, S06Escala, S07Convite,
+  S05Estrutura, S06Escala, S07Gargalo, S08Convite,
 ]
 
 const SLIDE_TITLES = [
   'Capa', 'Nossa História', 'Corpo Diretor', 'Ecossistema',
-  'Estrutura', 'Calculadora', 'Visão Global',
+  'Estrutura', 'Calculadora', 'O Gargalo', 'Visão Global',
 ]
 
 export default function App() {

@@ -18,11 +18,18 @@ const historico = [
 ]
 
 function FotoOps() {
+  const [src, setSrc] = useState('/assets/images/03.jpg')
   const [err, setErr] = useState(false)
+
+  const handleError = () => {
+    if (src === '/assets/images/03.jpg') { setSrc('/assets/images/operacoes.jpg'); return }
+    setErr(true)
+  }
+
   if (err) return null
   return (
     <div className="rounded-xl overflow-hidden mb-3" style={{ height: 80, border: '1px solid #222' }}>
-      <img src="/assets/images/operacoes.jpg" alt="Operações" onError={() => setErr(true)}
+      <img src={src} alt="Operações" onError={handleError}
         style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.65) saturate(0.7)' }} />
     </div>
   )

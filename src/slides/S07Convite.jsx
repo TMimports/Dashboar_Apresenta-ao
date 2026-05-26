@@ -32,11 +32,18 @@ const redes = [
 ]
 
 function FotoParceria() {
+  const [src, setSrc] = useState('/assets/images/04.jpg')
   const [err, setErr] = useState(false)
+
+  const handleError = () => {
+    if (src === '/assets/images/04.jpg') { setSrc('/assets/images/parceria.jpg'); return }
+    setErr(true)
+  }
+
   if (err) return null
   return (
     <div className="rounded-xl overflow-hidden" style={{ height: 110, border: '1px solid rgba(255,106,0,0.25)', flexShrink: 0 }}>
-      <img src="/assets/images/parceria.jpg" alt="Parceria B2B" onError={() => setErr(true)}
+      <img src={src} alt="Parceria B2B" onError={handleError}
         style={{ width: '100%', height: '100%', objectFit: 'cover', filter: 'brightness(0.72) saturate(0.85)' }} />
     </div>
   )
@@ -53,7 +60,7 @@ export default function S07Convite() {
       }} />
 
       <div className="mb-3 animate-fade-up">
-        <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">07 / Visão Global & Parceria</p>
+        <p className="text-[#FF6A00] text-xs font-medium tracking-widest uppercase mb-1">08 / Visão Global & Parceria</p>
         <h2 className="slide-title text-white">O Futuro da Mobilidade</h2>
         <p className="text-[#8E8E93] text-xs mt-0.5">Parceria Estratégica de Crescimento — Trade Finance & B2B</p>
       </div>
