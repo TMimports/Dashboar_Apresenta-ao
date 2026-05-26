@@ -84,27 +84,6 @@ export default function S06Escala() {
         {/* ── Sidebar — informações fiscais e tração ── */}
         <div className="slide-sidebar flex flex-col gap-2 animate-slide-left delay-200" style={{ minHeight: 0 }}>
 
-          {/* Tributação importação */}
-          <div className="p-3 rounded-xl" style={{ background: '#0D0D0D', border: '1px solid #1A1A1A', flexShrink: 0 }}>
-            <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold mb-2">
-              Tributos na Importação — China
-            </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-              {IMPORT_TAXES.map((t, i) => (
-                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                  <span style={{ color: '#8E8E93', fontSize: 9 }}>{t.label}</span>
-                  <div style={{ textAlign: 'right' }}>
-                    <span style={{
-                      color: t.rate === '0%' ? '#22C55E' : '#AEAEB2',
-                      fontSize: 9, fontWeight: 800,
-                    }}>{t.rate}</span>
-                    <span style={{ color: '#3A3A3C', fontSize: 8, display: 'block' }}>{t.note}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
           {/* Lucro Presumido */}
           <div className="p-3 rounded-xl" style={{ background: 'rgba(255,106,0,0.05)', border: '1px solid rgba(255,106,0,0.2)', flexShrink: 0 }}>
             <p className="text-[9px] text-[#FF6A00] uppercase tracking-widest font-bold mb-1.5">Regime — Lucro Presumido</p>
