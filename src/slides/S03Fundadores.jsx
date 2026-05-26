@@ -40,7 +40,7 @@ export default function S03Fundadores() {
 
             {!imgErr ? (
               <img
-                src="/assets/images/02.jpg"
+                src="/assets/images/tv03.jpg"
                 alt="Corpo Diretor TM GROUP"
                 onError={() => setImgErr(true)}
                 style={{
@@ -66,21 +66,13 @@ export default function S03Fundadores() {
               </div>
             )}
 
-            {/* Overlay legenda sobre a foto */}
+            {/* Overlay sutil de profundidade */}
             {!imgErr && (
               <div style={{
                 position: 'absolute', bottom: 0, left: 0, right: 0,
-                background: 'linear-gradient(to top, rgba(10,10,10,0.85) 0%, transparent 100%)',
+                background: 'linear-gradient(to top, rgba(10,10,10,0.6) 0%, transparent 60%)',
                 borderRadius: '0 0 16px 16px',
-                padding: '1.5rem 1rem 0.75rem',
-              }}>
-                <p style={{ color: '#FF6B00', fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
-                  Codemar — Maricá, RJ
-                </p>
-                <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: 11, marginTop: 2 }}>
-                  Entrega de veículos elétricos à Guarda Municipal
-                </p>
-              </div>
+              }} />
             )}
           </div>
 

@@ -57,7 +57,7 @@ export default function S01Cover() {
         {/* Badge */}
         <div className="animate-fade-in delay-100 px-5 py-1.5 rounded-full border text-[10px] font-bold tracking-widest uppercase mb-1"
           style={{ background: 'rgba(255,107,0,0.05)', borderColor: 'rgba(255,107,0,0.28)', color: '#FF6B00' }}>
-          Holding de Mobilidade Elétrica — Deck Executivo 2026
+          TM GROUP — Plataforma de Mobilidade Elétrica — 2026
         </div>
 
         {/* Logo TM GROUP */}

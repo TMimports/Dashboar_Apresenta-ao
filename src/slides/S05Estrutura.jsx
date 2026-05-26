@@ -120,7 +120,7 @@ export default function S05Estrutura() {
               <p className="text-[#FF6A00] text-xs font-bold uppercase tracking-widest">TM TECH</p>
             </div>
             <p className="text-white text-xs font-semibold mb-3 leading-relaxed">
-              Sistemas proprietários unificados para toda a operação da holding.
+              Sistemas proprietários unificados para toda a operação do grupo.
             </p>
             <div className="space-y-2.5">
               {tech.map((t, i) => (
