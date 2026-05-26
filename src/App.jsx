@@ -16,8 +16,8 @@ const SLIDES = [
 ]
 
 const SLIDE_TITLES = [
-  'Capa', 'Nossa História', 'Fundadores', 'Ecossistema',
-  'Estrutura', 'Escala & Lotes', 'Parceria',
+  'Capa', 'Nossa História', 'Corpo Diretor', 'Ecossistema',
+  'Estrutura', 'Calculadora', 'Visão Global',
 ]
 
 export default function App() {
@@ -32,10 +32,7 @@ export default function App() {
     if (animating || idx === current) return
     setDirection(idx > current ? 1 : -1)
     setAnimating(true)
-    setTimeout(() => {
-      setCurrent(idx)
-      setAnimating(false)
-    }, 250)
+    setTimeout(() => { setCurrent(idx); setAnimating(false) }, 250)
   }, [animating, current])
 
   const next = useCallback(() => goTo(Math.min(current + 1, SLIDES.length - 1)), [current, goTo])
@@ -59,9 +56,7 @@ export default function App() {
     if (touchStartX === null) return
     const dx = touchStartX - e.changedTouches[0].clientX
     const dy = touchStartY - e.changedTouches[0].clientY
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) {
-      dx > 0 ? next() : prev()
-    }
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 48) dx > 0 ? next() : prev()
     setTouchStartX(null)
     setTouchStartY(null)
   }, [touchStartX, touchStartY, next, prev])
@@ -69,28 +64,42 @@ export default function App() {
   const CurrentSlide = SLIDES[current]
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden bg-[#0A0A0A]">
+    /* ── Outer: viewport, fundo preto absoluto ── */
+    <div style={{
+      width: '100vw', height: '100vh',
+      background: '#000000',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      overflow: 'hidden',
+    }}>
       {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
-      <div
-        key={current}
-        className="w-full h-full"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-        style={{
-          animation: `${direction > 0 ? 'slideInRight' : 'slideInLeft'} 0.35s ease-out forwards`,
-        }}
-      >
-        <CurrentSlide />
-      </div>
 
-      <SlideNav
-        current={current}
-        total={SLIDES.length}
-        titles={SLIDE_TITLES}
-        onNext={next}
-        onPrev={prev}
-        onGoTo={goTo}
-      />
+      {/* ── Container 16:9 travado matematicamente ── */}
+      <div style={{
+        width: 'min(100vw, calc(100vh * 16 / 9))',
+        height: 'min(100vh, calc(100vw * 9 / 16))',
+        position: 'relative',
+        overflow: 'hidden',
+        flexShrink: 0,
+      }}>
+        <div
+          key={current}
+          className="w-full h-full"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+          style={{ animation: `${direction > 0 ? 'slideInRight' : 'slideInLeft'} 0.35s ease-out forwards` }}
+        >
+          <CurrentSlide />
+        </div>
+
+        <SlideNav
+          current={current}
+          total={SLIDES.length}
+          titles={SLIDE_TITLES}
+          onNext={next}
+          onPrev={prev}
+          onGoTo={goTo}
+        />
+      </div>
 
       <style>{`
         @keyframes slideInRight {
