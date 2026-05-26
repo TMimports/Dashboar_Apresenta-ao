@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const timeline = [
   {
-    year: '~2016',
+    year: '2017',
     label: 'Fundação',
     text: 'Iniciou como loja de motopeças, oferecendo manutenção e reposição com foco em qualidade.',
   },
