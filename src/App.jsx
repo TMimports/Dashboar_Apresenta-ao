@@ -25,6 +25,8 @@ const SLIDE_TITLES = [
 // Canvas fixo 16:9 — slides sempre renderizados nesse tamanho e escalados para caber na tela
 const CANVAS_W = 1280
 const CANVAS_H = 720
+const NAV_H    = 56   // altura real da barra de navegação inferior (height:56 no SlideNav)
+const TOP_H    = 40   // altura das logos fixas no topo (top:12 + ~28px de logo)
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true)
@@ -35,11 +37,13 @@ export default function App() {
   const [touchStartX, setTouchStartX] = useState(null)
   const [touchStartY, setTouchStartY] = useState(null)
 
-  // Calcula escala para que o canvas caiba na viewport mantendo 16:9
+  // Calcula escala descontando nav inferior e logos superiores
   useEffect(() => {
     const update = () => {
-      const sx = window.innerWidth  / CANVAS_W
-      const sy = window.innerHeight / CANVAS_H
+      const usableW = window.innerWidth
+      const usableH = window.innerHeight - NAV_H - TOP_H
+      const sx = usableW / CANVAS_W
+      const sy = usableH / CANVAS_H
       setScale(Math.min(sx, sy))
     }
     update()
@@ -91,12 +95,12 @@ export default function App() {
     }}>
       {showSplash && <SplashScreen onDone={() => setShowSplash(false)} />}
 
-      {/* Canvas fixo 1280×720 centralizado e escalado — SEM SlideNav dentro */}
+      {/* Canvas fixo 1280×720 centralizado na área útil (entre logos e nav) */}
       <div style={{
         width: CANVAS_W,
         height: CANVAS_H,
         position: 'absolute',
-        top: '50%',
+        top: `calc(${TOP_H}px + (100vh - ${TOP_H}px - ${NAV_H}px) / 2)`,
         left: '50%',
         transform: `translate(-50%, -50%) scale(${scale})`,
         transformOrigin: 'center center',
