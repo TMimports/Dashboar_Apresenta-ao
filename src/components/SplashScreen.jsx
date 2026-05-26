@@ -175,8 +175,8 @@ export default function SplashScreen({ onDone }) {
           marginBottom: '1.5rem',
         }}>
           <img
-            src="/logo-tm-eletricas.svg"
-            alt="TM Elétricas"
+            src="/logo-tm-group.svg"
+            alt="TM GROUP"
             style={{
               height: 'clamp(80px, 15vw, 140px)',
               objectFit: 'contain',

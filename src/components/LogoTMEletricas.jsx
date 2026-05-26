@@ -19,7 +19,7 @@ export default function LogoTMEletricas({ size = 'md', variant = 'full', animate
   const s = sizeMap[size] || sizeMap.md
   const clamp = responsiveClamp[size] || responsiveClamp.md
 
-  const imgSrc   = variant === 'icon' ? '/logo-tm.svg' : '/logo-tm-eletricas.svg'
+  const imgSrc   = variant === 'icon' ? '/logo-tm.svg' : '/logo-tm-group.svg'
   const baseH    = variant === 'hero' ? s.h * 1.15 : s.h
   const baseClamp = variant === 'hero'
     ? clamp.replace(/(\d+)px/g, (_, n) => `${Math.round(Number(n) * 1.15)}px`)
@@ -47,7 +47,7 @@ export default function LogoTMEletricas({ size = 'md', variant = 'full', animate
     >
       <img
         src={imgSrc}
-        alt="TM Elétricas"
+        alt="TM GROUP"
         style={{
           ...imgStyle,
           filter: `drop-shadow(0 0 ${animated ? '8px' : '0px'} rgba(249,124,6,0.5))`,
